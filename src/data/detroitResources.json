@@ -1,0 +1,373 @@
+{
+  "categories": [
+    {
+      "id": "employment",
+      "name": "Employment & Training",
+      "icon": "briefcase",
+      "description": "Job placement, training, and career development"
+    },
+    {
+      "id": "childcare",
+      "name": "Child Care & Family",
+      "icon": "baby",
+      "description": "Child care assistance and family support services"
+    },
+    {
+      "id": "housing",
+      "name": "Housing",
+      "icon": "home",
+      "description": "Housing assistance, rental help, and foreclosure prevention"
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "icon": "heart",
+      "description": "Medical services and health insurance"
+    },
+    {
+      "id": "food",
+      "name": "Food & Nutrition",
+      "icon": "utensils",
+      "description": "Food assistance and nutrition programs"
+    },
+    {
+      "id": "utilities",
+      "name": "Utility & Energy",
+      "icon": "zap",
+      "description": "Utility bill assistance and energy programs"
+    },
+    {
+      "id": "financial",
+      "name": "Financial & Banking",
+      "icon": "dollar-sign",
+      "description": "Financial counseling and banking services"
+    },
+    {
+      "id": "business",
+      "name": "Entrepreneurship",
+      "icon": "trending-up",
+      "description": "Small business development and resources"
+    }
+  ],
+  "programs": [
+    {
+      "id": "michigan-works",
+      "name": "Michigan Works! Southeast",
+      "category": "employment",
+      "description": "Comprehensive job placement and workforce development services",
+      "eligibility": {
+        "income": "Any",
+        "age": "18+",
+        "residency": "Detroit metro area",
+        "employment": "Unemployed or underemployed"
+      },
+      "benefits": [
+        "Job search assistance",
+        "Resume writing help",
+        "Skills training programs",
+        "Career counseling"
+      ],
+      "documents": [
+        "Photo ID",
+        "Social Security card",
+        "Proof of income (if any)",
+        "High school diploma or GED"
+      ],
+      "contact": {
+        "phone": "(313) 833-3060",
+        "website": "https://www.michiganworks.org",
+        "address": "2121 Russell St, Detroit, MI 48207",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://www.michiganworks.org/locations"
+    },
+    {
+      "id": "techtown-detroit",
+      "name": "TechTown Detroit",
+      "category": "employment",
+      "description": "Entrepreneurship and innovation hub with business development programs",
+      "eligibility": {
+        "income": "Any",
+        "age": "18+",
+        "residency": "Detroit area",
+        "business": "Aspiring or existing entrepreneurs"
+      },
+      "benefits": [
+        "Business incubation",
+        "Mentorship programs",
+        "Access to funding",
+        "Workspace rentals"
+      ],
+      "documents": [
+        "Business plan (if available)",
+        "Photo ID",
+        "Proof of Detroit residency"
+      ],
+      "contact": {
+        "phone": "(313) 577-4200",
+        "website": "https://techtowndetroit.org",
+        "address": "440 Burroughs St, Detroit, MI 48202",
+        "hours": "Mon-Fri 9:00 AM - 5:00 PM"
+      },
+      "languages": ["English"],
+      "applicationUrl": "https://techtowndetroit.org/programs/"
+    },
+    {
+      "id": "motor-city-match",
+      "name": "Motor City Match",
+      "category": "business",
+      "description": "Small business grants and support for Detroit entrepreneurs",
+      "eligibility": {
+        "income": "Varies by program",
+        "age": "18+",
+        "residency": "Detroit city limits",
+        "business": "New or expanding business"
+      },
+      "benefits": [
+        "Up to $10,000 grants",
+        "Business coaching",
+        "Property matching",
+        "Technical assistance"
+      ],
+      "documents": [
+        "Business plan",
+        "Financial projections",
+        "Proof of Detroit residency",
+        "Tax returns"
+      ],
+      "contact": {
+        "phone": "(313) 224-6732",
+        "website": "https://motorcitymatch.com",
+        "address": "2 Woodward Ave, Detroit, MI 48226",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://motorcitymatch.com/apply/"
+    },
+    {
+      "id": "4c-childcare",
+      "name": "Child Care Coordinating Council (4C)",
+      "category": "childcare",
+      "description": "Child care assistance and quality early childhood programs",
+      "eligibility": {
+        "income": "Up to 200% Federal Poverty Level",
+        "age": "Children 0-13",
+        "residency": "Wayne County",
+        "employment": "Working or in school/training"
+      },
+      "benefits": [
+        "Child care subsidies",
+        "Quality child care referrals",
+        "Parent education",
+        "Support services"
+      ],
+      "documents": [
+        "Proof of income",
+        "Child's birth certificate",
+        "Immunization records",
+        "Work/school schedule"
+      ],
+      "contact": {
+        "phone": "(248) 477-1550",
+        "website": "https://www.4c.wayne.edu",
+        "address": "290 Hood Ave, Detroit, MI 48201",
+        "hours": "Mon-Fri 8:00 AM - 4:30 PM"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://www.4c.wayne.edu/child-care-assistance"
+    },
+    {
+      "id": "wic-program",
+      "name": "WIC Program",
+      "category": "food",
+      "description": "Nutrition assistance for women, infants, and children",
+      "eligibility": {
+        "income": "Up to 185% Federal Poverty Level",
+        "age": "Pregnant women, infants, children up to 5",
+        "residency": "Michigan resident",
+        "risk": "Nutritional risk assessment required"
+      },
+      "benefits": [
+        "Monthly food benefits",
+        "Nutrition education",
+        "Breastfeeding support",
+        "Health screenings"
+      ],
+      "documents": [
+        "Proof of income",
+        "Proof of identity",
+        "Proof of residency",
+        "Immunization records"
+      ],
+      "contact": {
+        "phone": "(313) 876-4000",
+        "website": "https://www.michigan.gov/wic",
+        "address": "Multiple locations in Detroit",
+        "hours": "Varies by location"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://www.michigan.gov/wic/find-wic-clinic"
+    },
+    {
+      "id": "dhc-housing",
+      "name": "Detroit Housing Commission",
+      "category": "housing",
+      "description": "Public housing and housing choice voucher programs",
+      "eligibility": {
+        "income": "Up to 80% Area Median Income",
+        "age": "Any",
+        "residency": "Detroit city limits",
+        "background": "Background check required"
+      },
+      "benefits": [
+        "Affordable public housing",
+        "Housing choice vouchers",
+        "Homeownership programs",
+        "Supportive services"
+      ],
+      "documents": [
+        "Photo ID",
+        "Social Security cards for all household members",
+        "Birth certificates",
+        "Proof of income for all adults"
+      ],
+      "contact": {
+        "phone": "(313) 877-8700",
+        "website": "https://www.dhcmi.org",
+        "address": "1600 E Lafayette St, Detroit, MI 48207",
+        "hours": "Mon-Fri 8:00 AM - 4:30 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://www.dhcmi.org/housing-programs"
+    },
+    {
+      "id": "erap-assistance",
+      "name": "Emergency Rental Assistance Program (ERAP)",
+      "category": "housing",
+      "description": "Emergency rental and utility assistance for eligible households",
+      "eligibility": {
+        "income": "Up to 80% Area Median Income",
+        "age": "Any",
+        "residency": "Detroit city limits",
+        "hardship": "COVID-19 related financial hardship"
+      },
+      "benefits": [
+        "Up to 18 months rent assistance",
+        "Utility assistance",
+        "Late fees and court costs",
+        "Moving expenses"
+      ],
+      "documents": [
+        "Lease agreement",
+        "Photo ID",
+        "Proof of income loss",
+        "Utility bills"
+      ],
+      "contact": {
+        "phone": "(313) 230-0022",
+        "website": "https://detroitmi.gov/departments/housing-and-revitalization-department/programs-and-services/emergency-rental-assistance-program-erap",
+        "address": "2 Woodward Ave, Detroit, MI 48226",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://erap.detroitmi.gov/"
+    },
+    {
+      "id": "medicaid-enrollment",
+      "name": "Medicaid Enrollment",
+      "category": "healthcare",
+      "description": "Health insurance coverage through Michigan Medicaid",
+      "eligibility": {
+        "income": "Up to 138% Federal Poverty Level",
+        "age": "Any",
+        "residency": "Michigan resident",
+        "citizenship": "U.S. citizen or qualified immigrant"
+      },
+      "benefits": [
+        "Comprehensive health coverage",
+        "Prescription drug coverage",
+        "Mental health services",
+        "Preventive care"
+      ],
+      "documents": [
+        "Photo ID",
+        "Social Security card",
+        "Proof of income",
+        "Proof of Michigan residency"
+      ],
+      "contact": {
+        "phone": "1-855-275-6424",
+        "website": "https://www.michigan.gov/mibridges",
+        "address": "Multiple enrollment locations",
+        "hours": "24/7 online, office hours vary"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://newmibridges.michigan.gov/"
+    },
+    {
+      "id": "snap-benefits",
+      "name": "SNAP Benefits",
+      "category": "food",
+      "description": "Supplemental Nutrition Assistance Program for food purchases",
+      "eligibility": {
+        "income": "Up to 130% Federal Poverty Level",
+        "age": "Any",
+        "residency": "Michigan resident",
+        "resources": "Asset limits apply"
+      },
+      "benefits": [
+        "Monthly food assistance",
+        "Farmers market incentives",
+        "Nutrition education",
+        "Double Up Food Bucks"
+      ],
+      "documents": [
+        "Photo ID",
+        "Social Security card",
+        "Proof of income",
+        "Utility bills"
+      ],
+      "contact": {
+        "phone": "1-855-275-6424",
+        "website": "https://www.michigan.gov/mibridges",
+        "address": "Multiple DHHS offices in Detroit",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish", "Arabic"],
+      "applicationUrl": "https://newmibridges.michigan.gov/"
+    },
+    {
+      "id": "dte-energy-assistance",
+      "name": "DTE Energy Assistance",
+      "category": "utilities",
+      "description": "Utility bill assistance and energy efficiency programs",
+      "eligibility": {
+        "income": "Up to 200% Federal Poverty Level",
+        "age": "Any",
+        "residency": "DTE service area",
+        "account": "Current DTE customer"
+      },
+      "benefits": [
+        "Utility bill payment assistance",
+        "Energy efficiency upgrades",
+        "Budget billing plans",
+        "Weatherization services"
+      ],
+      "documents": [
+        "Recent DTE bill",
+        "Photo ID",
+        "Proof of income",
+        "Social Security card"
+      ],
+      "contact": {
+        "phone": "1-800-477-4747",
+        "website": "https://www.dteenergy.com/us/en/residential/service-request/assistance-programs",
+        "address": "Multiple service centers",
+        "hours": "Mon-Fri 7:00 AM - 7:00 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://www.dteenergy.com/residential/assistance-programs"
+    }
+  ]
+}
