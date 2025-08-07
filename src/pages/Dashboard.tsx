@@ -19,6 +19,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { LoadingPage } from '@/components/ui/loading';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -81,23 +82,25 @@ export default function Dashboard() {
       urgent: false
     },
     {
+      title: 'Business Licenses',
+      description: 'Training & guidance',
+      icon: '🏢',
+      url: '/business-licenses',
+      urgent: false
+    },
+    {
       title: 'Job Training',
       description: 'Michigan Works! services',
       icon: '💼',
       url: '/programs?category=employment',
       urgent: false
     },
-    {
-      title: 'Health Insurance',
-      description: 'Medicaid enrollment',
-      icon: '❤️',
-      url: 'https://www.michigan.gov/mibridges',
-      urgent: false
-    },
   ];
 
+
+
   if (!profile) {
-    return <div>Loading...</div>;
+    return <LoadingPage message="Loading your dashboard..." />;
   }
 
   return (
