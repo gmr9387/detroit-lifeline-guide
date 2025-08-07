@@ -426,6 +426,54 @@ class DetroitServicesAPI {
         name: 'Entrepreneurship',
         icon: 'trending-up',
         description: 'Small business development and resources'
+      },
+      {
+        id: 'credit',
+        name: 'Credit Education & Repair',
+        icon: 'credit-card',
+        description: 'Credit counseling, repair, and financial education services'
+      },
+      {
+        id: 'education',
+        name: 'Education & Training',
+        icon: 'graduation-cap',
+        description: 'Trade schools, certificates, CDL training, and educational programs'
+      },
+      {
+        id: 'legal',
+        name: 'Legal Services',
+        icon: 'scales',
+        description: 'Record expungement, legal aid, and court assistance'
+      },
+      {
+        id: 'transportation',
+        name: 'Transportation',
+        icon: 'car',
+        description: 'Public transit, ride assistance, and transportation vouchers'
+      },
+      {
+        id: 'mental-health',
+        name: 'Mental Health',
+        icon: 'brain',
+        description: 'Counseling, therapy, and mental health support services'
+      },
+      {
+        id: 'medical',
+        name: 'Medical Services',
+        icon: 'stethoscope',
+        description: 'Clinics, specialty care, and comprehensive medical services'
+      },
+      {
+        id: 'culture',
+        name: 'Arts & Culture',
+        icon: 'palette',
+        description: 'Cultural activities, arts programs, and community events'
+      },
+      {
+        id: 'emergency',
+        name: 'Emergency Services',
+        icon: 'alert-circle',
+        description: 'Crisis intervention, emergency assistance, and immediate help'
       }
     ];
 
