@@ -474,6 +474,30 @@ class DetroitServicesAPI {
         name: 'Emergency Services',
         icon: 'alert-circle',
         description: 'Crisis intervention, emergency assistance, and immediate help'
+      },
+      {
+        id: 'technology',
+        name: 'Technology & Digital',
+        icon: 'monitor',
+        description: 'Digital literacy, tech training, computer access, and coding programs'
+      },
+      {
+        id: 'seniors',
+        name: 'Senior Services',
+        icon: 'users',
+        description: 'Programs and services specifically for seniors and elderly residents'
+      },
+      {
+        id: 'veterans',
+        name: 'Veterans Services',
+        icon: 'flag',
+        description: 'Support services for veterans and military families'
+      },
+      {
+        id: 'youth',
+        name: 'Youth Programs',
+        icon: 'star',
+        description: 'Programs for children, teens, and young adults'
       }
     ];
 
