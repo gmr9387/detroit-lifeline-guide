@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback, memo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,13 +20,113 @@ import {
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
 
-export default function Dashboard() {
+// Memoized components for better performance
+const RecommendationCard = memo(({ program }: { program: Program }) => (
+  <Card key={program.id} className="cursor-pointer hover:shadow-md transition-shadow">
+    <CardHeader className="pb-2">
+      <div className="flex items-start justify-between">
+        <CardTitle className="text-lg font-semibold">{program.name}</CardTitle>
+        <Badge variant="secondary" className="ml-2">
+          {program.category}
+        </Badge>
+      </div>
+    </CardHeader>
+    <CardContent>
+      <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        {program.description}
+      </p>
+      <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+        <div className="flex items-center gap-1">
+          <MapPin className="h-4 w-4" />
+          <span>Detroit</span>
+        </div>
+        {program.phone && (
+          <div className="flex items-center gap-1">
+            <Phone className="h-4 w-4" />
+            <span className="truncate">{program.phone}</span>
+          </div>
+        )}
+      </div>
+      <Link to={`/program/${program.id}`}>
+        <Button size="sm" className="w-full">
+          Learn More <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Link>
+    </CardContent>
+  </Card>
+));
+
+const ApplicationCard = memo(({ application }: { application: Application }) => (
+  <Card key={application.id}>
+    <CardContent className="pt-4">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="font-semibold">{application.programName}</h3>
+        <div className="flex items-center gap-2">
+          {application.status === 'approved' && (
+            <CheckCircle className="h-4 w-4 text-green-500" />
+          )}
+          {application.status === 'pending' && (
+            <Clock className="h-4 w-4 text-yellow-500" />
+          )}
+          {application.status === 'denied' && (
+            <AlertCircle className="h-4 w-4 text-red-500" />
+          )}
+          <Badge 
+            variant={application.status === 'approved' ? 'default' : 'secondary'}
+            className={
+              application.status === 'approved' 
+                ? 'bg-green-100 text-green-800' 
+                : application.status === 'pending'
+                ? 'bg-yellow-100 text-yellow-800'
+                : 'bg-red-100 text-red-800'
+            }
+          >
+            {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
+          </Badge>
+        </div>
+      </div>
+      <p className="text-sm text-gray-600 mb-2">
+        Applied on {new Date(application.appliedDate).toLocaleDateString()}
+      </p>
+      {application.nextSteps && (
+        <p className="text-sm text-blue-600 font-medium">
+          Next: {application.nextSteps}
+        </p>
+      )}
+    </CardContent>
+  </Card>
+));
+
+const Dashboard = memo(() => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [recommendations, setRecommendations] = useState<Program[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
 
-  useEffect(() => {
+  // Memoize expensive calculations
+  const allPrograms = useMemo(() => detroitResources.programs as Program[], []);
+  
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
+  }, []);
+
+  const personalizedRecommendations = useMemo(() => {
+    if (!profile) return [];
+    return allPrograms.filter(program => 
+      profile.primaryNeeds.includes(program.category)
+    ).slice(0, 4);
+  }, [allPrograms, profile]);
+
+  const recentApplications = useMemo(() => {
+    return applications
+      .sort((a, b) => new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime())
+      .slice(0, 3);
+  }, [applications]);
+
+  const loadUserData = useCallback(() => {
     const userProfile = storageUtils.getUserProfile();
     if (!userProfile) {
       navigate('/onboarding');
@@ -35,236 +135,213 @@ export default function Dashboard() {
 
     setProfile(userProfile);
     setApplications(storageUtils.getApplications());
-    
-    // Generate personalized recommendations
-    const allPrograms = detroitResources.programs as Program[];
-    const personalizedPrograms = allPrograms.filter(program => 
-      userProfile.primaryNeeds.includes(program.category)
-    ).slice(0, 4);
-    
-    setRecommendations(personalizedPrograms);
   }, [navigate]);
 
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
-  };
+  useEffect(() => {
+    loadUserData();
+  }, [loadUserData]);
 
-  const getStatusBadge = (status: Application['status']) => {
-    const variants = {
-      saved: { variant: 'secondary' as const, text: 'Saved' },
-      started: { variant: 'warning' as const, text: 'In Progress' },
-      submitted: { variant: 'default' as const, text: 'Submitted' },
-      approved: { variant: 'success' as const, text: 'Approved' },
-      denied: { variant: 'destructive' as const, text: 'Denied' },
-    };
-    
-    const config = variants[status];
-    return <Badge variant={config.variant}>{config.text}</Badge>;
-  };
-
-  const quickActions = [
-    {
-      title: 'Apply for SNAP',
-      description: 'Food assistance program',
-      icon: '🍎',
-      url: 'https://newmibridges.michigan.gov/',
-      urgent: true
-    },
-    {
-      title: 'Find Housing Help',
-      description: 'Emergency rental assistance',
-      icon: '🏠',
-      url: '/programs?category=housing',
-      urgent: false
-    },
-    {
-      title: 'Job Training',
-      description: 'Michigan Works! services',
-      icon: '💼',
-      url: '/programs?category=employment',
-      urgent: false
-    },
-    {
-      title: 'Health Insurance',
-      description: 'Medicaid enrollment',
-      icon: '❤️',
-      url: 'https://www.michigan.gov/mibridges',
-      urgent: false
-    },
-  ];
+  useEffect(() => {
+    if (personalizedRecommendations.length > 0) {
+      setRecommendations(personalizedRecommendations);
+    }
+  }, [personalizedRecommendations]);
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return null; // or a loading skeleton
   }
 
   return (
     <AppLayout>
-      <div className="p-4 space-y-6">
-        {/* Header */}
-        <div className="bg-gradient-hero rounded-xl p-6 text-primary-foreground">
-          <h1 className="text-2xl font-bold mb-2">
-            {getGreeting()}! 👋
-          </h1>
-          <p className="text-primary-foreground/90 mb-4">
-            You have {recommendations.length} programs that might help you.
-          </p>
-          <div className="flex items-center gap-2 text-sm text-primary-foreground/80">
-            <MapPin className="h-4 w-4" />
-            <span>Detroit, MI {profile.zipCode}</span>
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-8 max-w-6xl">
+          {/* Header Section */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {greeting}, {profile.firstName}!
+            </h1>
+            <p className="text-gray-600">
+              Welcome back to your Detroit Resource Navigator dashboard.
+            </p>
           </div>
-        </div>
 
-        {/* Quick Actions */}
-        <div>
-          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
-            <Clock className="h-5 w-5 text-primary" />
-            Quick Actions
-          </h2>
-          <div className="grid grid-cols-2 gap-3">
-            {quickActions.map((action, index) => (
-              <Card 
-                key={index} 
-                className={cn(
-                  "cursor-pointer transition-smooth hover:shadow-md",
-                  action.urgent && "ring-2 ring-secondary"
-                )}
-                onClick={() => {
-                  if (action.url.startsWith('http')) {
-                    window.open(action.url, '_blank');
-                  } else {
-                    navigate(action.url);
-                  }
-                }}
-              >
-                <CardContent className="p-4">
-                  <div className="text-2xl mb-2">{action.icon}</div>
-                  <h3 className="font-medium text-sm mb-1">{action.title}</h3>
-                  <p className="text-xs text-muted-foreground">{action.description}</p>
-                  {action.urgent && (
-                    <Badge variant="secondary" className="mt-2 text-xs">Urgent</Badge>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-100 rounded-lg">
+                    <Star className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Recommended Programs</p>
+                    <p className="text-2xl font-bold text-gray-900">{recommendations.length}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-100 rounded-lg">
+                    <CheckCircle className="h-6 w-6 text-green-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Active Applications</p>
+                    <p className="text-2xl font-bold text-gray-900">{applications.length}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex items-center">
+                  <div className="p-2 bg-yellow-100 rounded-lg">
+                    <Bell className="h-6 w-6 text-yellow-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Pending Actions</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {applications.filter(app => app.status === 'pending').length}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        </div>
 
-        {/* My Applications */}
-        {applications.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                My Applications
-              </h2>
-              <Link to="/applications">
-                <Button variant="ghost" size="sm">View All</Button>
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Recommended Programs */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Recommended for You
+                </h2>
+                <Link to="/programs">
+                  <Button variant="outline" size="sm">
+                    View All <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+
+              {recommendations.length > 0 ? (
+                <div className="space-y-4">
+                  {recommendations.map((program) => (
+                    <RecommendationCard key={program.id} program={program} />
+                  ))}
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="text-center py-8">
+                    <Star className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      No recommendations yet
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Update your profile to get personalized program recommendations.
+                    </p>
+                    <Link to="/programs">
+                      <Button>Browse All Programs</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              )}
             </div>
-            <div className="space-y-3">
-              {applications.slice(0, 3).map((app) => (
-                <Card key={app.id} className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-medium">{app.programName}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Applied {new Date(app.appliedAt).toLocaleDateString()}
+
+            {/* Recent Applications */}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Recent Applications
+                </h2>
+                <Button variant="outline" size="sm">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  View History
+                </Button>
+              </div>
+
+              {recentApplications.length > 0 ? (
+                <div className="space-y-4">
+                  {recentApplications.map((application) => (
+                    <ApplicationCard key={application.id} application={application} />
+                  ))}
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="text-center py-8">
+                    <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">
+                      No applications yet
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Start by exploring programs that match your needs.
+                    </p>
+                    <Link to="/programs">
+                      <Button>Find Programs</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="mt-8">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Quick Actions</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <Link to="/programs">
+                <Card className="cursor-pointer hover:shadow-md transition-shadow">
+                  <CardContent className="pt-6">
+                    <div className="text-center">
+                      <div className="p-3 bg-blue-100 rounded-lg w-fit mx-auto mb-4">
+                        <Star className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <h3 className="font-semibold mb-2">Explore Programs</h3>
+                      <p className="text-sm text-gray-600">
+                        Browse all available assistance programs in Detroit
                       </p>
                     </div>
-                    {getStatusBadge(app.status)}
-                  </div>
+                  </CardContent>
                 </Card>
-              ))}
-            </div>
-          </div>
-        )}
+              </Link>
 
-        {/* Recommendations */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              Recommended for You
-            </h2>
-            <Link to="/programs">
-              <Button variant="ghost" size="sm">See All Programs</Button>
-            </Link>
-          </div>
-          <div className="space-y-4">
-            {recommendations.map((program) => (
-              <Card key={program.id} className="transition-smooth hover:shadow-md">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-base mb-1">{program.name}</CardTitle>
-                      <CardDescription className="text-sm line-clamp-2">
-                        {program.description}
-                      </CardDescription>
+              <Card className="cursor-pointer hover:shadow-md transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="p-3 bg-green-100 rounded-lg w-fit mx-auto mb-4">
+                      <Bell className="h-6 w-6 text-green-600" />
                     </div>
-                    <Badge variant="secondary" className="ml-2">
-                      {detroitResources.categories.find(c => c.id === program.category)?.name}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Phone className="h-4 w-4" />
-                      <span>{program.contact.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>{program.contact.hours}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => navigate(`/program/${program.id}`)}
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4 ml-1" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={() => window.open(program.applicationUrl, '_blank')}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
+                    <h3 className="font-semibold mb-2">Get Notifications</h3>
+                    <p className="text-sm text-gray-600">
+                      Set up alerts for new programs and application updates
+                    </p>
                   </div>
                 </CardContent>
               </Card>
-            ))}
+
+              <Card className="cursor-pointer hover:shadow-md transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="p-3 bg-purple-100 rounded-lg w-fit mx-auto mb-4">
+                      <Phone className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <h3 className="font-semibold mb-2">Get Help</h3>
+                    <p className="text-sm text-gray-600">
+                      Contact support for assistance with applications
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-
-        {/* Important Notices */}
-        <Card className="border-warning bg-warning/5">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-warning" />
-              Important Reminders
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2 text-sm">
-              <p>• SNAP benefit renewals are due monthly</p>
-              <p>• Emergency rental assistance applications close Feb 28</p>
-              <p>• Free tax preparation available until April 15</p>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </AppLayout>
   );
-}
+});
 
-function cn(...classes: (string | undefined)[]): string {
-  return classes.filter(Boolean).join(' ');
-}
+Dashboard.displayName = 'Dashboard';
+
+export default Dashboard;

@@ -7,6 +7,45 @@
     <meta name="description" content="Find government services, social programs, and community resources in Detroit. Get personalized help for your family's needs." />
     <meta name="author" content="Detroit Resource Navigator" />
 
+    <!-- Performance optimizations -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="/src/main.tsx">
+    <link rel="preload" href="/src/index.css" as="style">
+    
+    <!-- Critical CSS inlined by Vite -->
+    <style>
+      /* Critical loading spinner styles */
+      .loading-fallback {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        z-index: 9999;
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+
     <meta property="og:title" content="Detroit Resource Navigator" />
     <meta property="og:description" content="Find government services, social programs, and community resources in Detroit. Get personalized help for your family's needs." />
     <meta property="og:type" content="website" />
@@ -18,7 +57,12 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback loading UI for JS-disabled users -->
+      <div class="loading-fallback">
+        <div class="spinner"></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
