@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Programs from "./pages/Programs";
 import ProgramDetail from "./pages/ProgramDetail";
 import BusinessLicenses from "./pages/BusinessLicenses";
+import CommunityHub from "./pages/CommunityHub";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,10 +27,11 @@ const App = () => (
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/programs" element={<Programs />} />
-            <Route path="/program/:programId" element={<ProgramDetail />} />
-            <Route path="/business-licenses" element={<BusinessLicenses />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+                      <Route path="/program/:programId" element={<ProgramDetail />} />
+          <Route path="/business-licenses" element={<BusinessLicenses />} />
+          <Route path="/community" element={<CommunityHub />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

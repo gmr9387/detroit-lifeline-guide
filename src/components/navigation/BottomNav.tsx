@@ -6,7 +6,7 @@ const navItems = [
   { icon: Home, label: 'Home', path: '/dashboard' },
   { icon: Search, label: 'Programs', path: '/programs' },
   { icon: Plus, label: 'Business', path: '/business-licenses' },
-  { icon: Heart, label: 'Saved', path: '/favorites' },
+  { icon: Users, label: 'Community', path: '/community' },
   { icon: User, label: 'Profile', path: '/profile' },
 ];
 

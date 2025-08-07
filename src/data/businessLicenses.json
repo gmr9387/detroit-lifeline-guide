@@ -35,6 +35,90 @@
       "name": "Automotive & Transportation",
       "icon": "car",
       "description": "Auto repair, transportation services, and vehicle-related businesses"
+    },
+    {
+      "id": "agriculture",
+      "name": "Agriculture & Farming",
+      "icon": "leaf",
+      "description": "Farms, farmers markets, and agricultural businesses"
+    },
+    {
+      "id": "construction",
+      "name": "Construction & Trades",
+      "icon": "hammer",
+      "description": "Construction, contracting, and skilled trades"
+    },
+    {
+      "id": "entertainment",
+      "name": "Entertainment & Recreation",
+      "icon": "music",
+      "description": "Entertainment venues, recreation facilities, and cultural businesses"
+    },
+    {
+      "id": "education",
+      "name": "Education & Training",
+      "icon": "graduation-cap",
+      "description": "Schools, training centers, and educational services"
+    },
+    {
+      "id": "technology",
+      "name": "Technology & Innovation",
+      "icon": "laptop",
+      "description": "Tech companies, software development, and digital services"
+    },
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing & Industry",
+      "icon": "factory",
+      "description": "Manufacturing, industrial, and production businesses"
+    },
+    {
+      "id": "real-estate",
+      "name": "Real Estate & Property",
+      "icon": "home",
+      "description": "Real estate, property management, and housing services"
+    },
+    {
+      "id": "financial",
+      "name": "Financial Services",
+      "icon": "dollar-sign",
+      "description": "Banking, insurance, and financial services"
+    },
+    {
+      "id": "beauty",
+      "name": "Beauty & Personal Care",
+      "icon": "scissors",
+      "description": "Salons, spas, and personal care services"
+    },
+    {
+      "id": "pet-services",
+      "name": "Pet Services",
+      "icon": "paw-print",
+      "description": "Pet grooming, veterinary services, and animal care"
+    },
+    {
+      "id": "childcare",
+      "name": "Childcare & Education",
+      "icon": "baby",
+      "description": "Daycares, preschools, and child development services"
+    },
+    {
+      "id": "senior-services",
+      "name": "Senior Services",
+      "icon": "users",
+      "description": "Senior care, assisted living, and elder services"
+    },
+    {
+      "id": "environmental",
+      "name": "Environmental & Green",
+      "icon": "tree",
+      "description": "Environmental services, recycling, and green businesses"
+    },
+    {
+      "id": "nonprofit",
+      "name": "Nonprofit & Community",
+      "icon": "heart",
+      "description": "Nonprofits, community organizations, and social services"
     }
   ],
   "licenses": [
@@ -97,31 +181,89 @@
       ]
     },
     {
-      "id": "grocery-store-license",
-      "name": "Grocery Store License",
-      "category": "retail",
-      "description": "License required to operate a grocery store or food retail establishment",
+      "id": "farmers-market-vendor",
+      "name": "Farmers Market Vendor License",
+      "category": "agriculture",
+      "description": "License to sell products at Detroit farmers markets",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "foodSafety": "Food Safety certification for food vendors",
+        "inspections": "Product inspection required",
+        "insurance": "General liability insurance",
+        "zoning": "Market-specific requirements"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Product source documentation",
+        "Food safety certificate (if applicable)",
+        "Market application",
+        "Proof of insurance",
+        "Product liability coverage"
+      ],
+      "fees": {
+        "application": 50,
+        "annual": 100,
+        "market": 25
+      },
+      "timeline": "2-3 weeks",
+      "contact": {
+        "department": "Detroit Department of Neighborhoods",
+        "phone": "(313) 224-3450",
+        "website": "https://detroitmi.gov/departments/neighborhoods",
+        "address": "2 Woodward Ave, Detroit, MI 48226"
+      },
+      "trainingModules": [
+        {
+          "id": "market-operations",
+          "title": "Farmers Market Operations",
+          "duration": "1.5 hours",
+          "topics": [
+            "Market rules and regulations",
+            "Product display standards",
+            "Customer service best practices",
+            "Sales and tax reporting"
+          ]
+        },
+        {
+          "id": "local-produce",
+          "title": "Local Produce Standards",
+          "duration": "1 hour",
+          "topics": [
+            "Organic certification requirements",
+            "Local sourcing documentation",
+            "Quality control standards",
+            "Seasonal product planning"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food-truck-license",
+      "name": "Food Truck License",
+      "category": "food-service",
+      "description": "License required to operate a food truck or mobile food service",
       "requirements": {
         "businessRegistration": "Michigan LLC or Corporation",
         "foodSafety": "Food Safety Manager Certification",
-        "inspections": "Health Department and Fire Department inspections",
-        "insurance": "General liability and property insurance",
-        "zoning": "Commercial zoning for retail"
+        "vehicle": "Vehicle inspection and registration",
+        "insurance": "Vehicle and general liability insurance",
+        "permits": "Mobile food service permit"
       },
       "documents": [
         "Business registration certificate",
         "Food Safety Manager certificate",
-        "Store layout and floor plan",
-        "Inventory list",
-        "Proof of insurance",
-        "Zoning compliance letter"
+        "Vehicle registration and insurance",
+        "Truck layout and equipment list",
+        "Menu with all food items",
+        "Route and location plans"
       ],
       "fees": {
-        "application": 200,
-        "annual": 400,
-        "inspection": 100
+        "application": 100,
+        "annual": 250,
+        "vehicle": 50,
+        "inspection": 75
       },
-      "timeline": "6-8 weeks",
+      "timeline": "3-4 weeks",
       "contact": {
         "department": "Detroit Health Department",
         "phone": "(313) 876-4000",
@@ -130,26 +272,25 @@
       },
       "trainingModules": [
         {
-          "id": "grocery-safety",
-          "title": "Grocery Store Safety Standards",
-          "duration": "2.5 hours",
+          "id": "mobile-food-safety",
+          "title": "Mobile Food Service Safety",
+          "duration": "2 hours",
           "topics": [
-            "Food storage and rotation",
-            "Expiration date management",
-            "Refrigeration requirements",
-            "Pest control measures",
-            "Employee training requirements"
+            "Mobile kitchen requirements",
+            "Food storage in limited space",
+            "Waste disposal procedures",
+            "Location and parking regulations"
           ]
         },
         {
-          "id": "retail-operations",
-          "title": "Retail Operations Best Practices",
-          "duration": "2 hours",
+          "id": "food-truck-operations",
+          "title": "Food Truck Operations",
+          "duration": "1.5 hours",
           "topics": [
-            "Inventory management",
-            "Customer service standards",
-            "Security measures",
-            "Cash handling procedures"
+            "Route planning and scheduling",
+            "Equipment maintenance",
+            "Weather considerations",
+            "Customer service on the go"
           ]
         }
       ]
@@ -216,32 +357,31 @@
       ]
     },
     {
-      "id": "food-truck-license",
-      "name": "Food Truck License",
-      "category": "food-service",
-      "description": "License required to operate a food truck or mobile food service",
+      "id": "grocery-store-license",
+      "name": "Grocery Store License",
+      "category": "retail",
+      "description": "License required to operate a grocery store or food retail establishment",
       "requirements": {
         "businessRegistration": "Michigan LLC or Corporation",
         "foodSafety": "Food Safety Manager Certification",
-        "vehicle": "Vehicle inspection and registration",
-        "insurance": "Vehicle and general liability insurance",
-        "permits": "Mobile food service permit"
+        "inspections": "Health Department and Fire Department inspections",
+        "insurance": "General liability and property insurance",
+        "zoning": "Commercial zoning for retail"
       },
       "documents": [
         "Business registration certificate",
         "Food Safety Manager certificate",
-        "Vehicle registration and insurance",
-        "Truck layout and equipment list",
-        "Menu with all food items",
-        "Route and location plans"
+        "Store layout and floor plan",
+        "Inventory list",
+        "Proof of insurance",
+        "Zoning compliance letter"
       ],
       "fees": {
-        "application": 100,
-        "annual": 250,
-        "vehicle": 50,
-        "inspection": 75
+        "application": 200,
+        "annual": 400,
+        "inspection": 100
       },
-      "timeline": "3-4 weeks",
+      "timeline": "6-8 weeks",
       "contact": {
         "department": "Detroit Health Department",
         "phone": "(313) 876-4000",
@@ -250,25 +390,26 @@
       },
       "trainingModules": [
         {
-          "id": "mobile-food-safety",
-          "title": "Mobile Food Service Safety",
-          "duration": "2 hours",
+          "id": "grocery-safety",
+          "title": "Grocery Store Safety Standards",
+          "duration": "2.5 hours",
           "topics": [
-            "Mobile kitchen requirements",
-            "Food storage in limited space",
-            "Waste disposal procedures",
-            "Location and parking regulations"
+            "Food storage and rotation",
+            "Expiration date management",
+            "Refrigeration requirements",
+            "Pest control measures",
+            "Employee training requirements"
           ]
         },
         {
-          "id": "food-truck-operations",
-          "title": "Food Truck Operations",
-          "duration": "1.5 hours",
+          "id": "retail-operations",
+          "title": "Retail Operations Best Practices",
+          "duration": "2 hours",
           "topics": [
-            "Route planning and scheduling",
-            "Equipment maintenance",
-            "Weather considerations",
-            "Customer service on the go"
+            "Inventory management",
+            "Customer service standards",
+            "Security measures",
+            "Cash handling procedures"
           ]
         }
       ]
@@ -276,7 +417,7 @@
     {
       "id": "barber-cosmetology",
       "name": "Barber/Cosmetology License",
-      "category": "professional",
+      "category": "beauty",
       "description": "License required to operate a barber shop or cosmetology business",
       "requirements": {
         "businessRegistration": "Michigan LLC or Corporation",
@@ -386,6 +527,747 @@
           ]
         }
       ]
+    },
+    {
+      "id": "childcare-license",
+      "name": "Childcare License",
+      "category": "childcare",
+      "description": "License required to operate a daycare or childcare facility",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "background": "Criminal background checks for all staff",
+        "inspections": "Department of Human Services inspection",
+        "insurance": "General liability and abuse insurance",
+        "zoning": "Proper zoning for childcare"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Staff background checks",
+        "Facility floor plan",
+        "Emergency procedures plan",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 150,
+        "annual": 300,
+        "inspection": 75
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Michigan Department of Human Services",
+        "phone": "(517) 373-2035",
+        "website": "https://www.michigan.gov/mdhhs/assistance-programs/childcare",
+        "address": "333 S Grand Ave, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "childcare-safety",
+          "title": "Childcare Safety Standards",
+          "duration": "3 hours",
+          "topics": [
+            "Child safety protocols",
+            "Emergency procedures",
+            "Health and hygiene standards",
+            "Staff training requirements"
+          ]
+        },
+        {
+          "id": "childcare-operations",
+          "title": "Childcare Operations",
+          "duration": "2 hours",
+          "topics": [
+            "Curriculum development",
+            "Parent communication",
+            "Record keeping",
+            "Staff management"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "construction-contractor",
+      "name": "Construction Contractor License",
+      "category": "construction",
+      "description": "License required to operate a construction or contracting business",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Contractor license or trade certification",
+        "inspections": "Safety and compliance inspections",
+        "insurance": "General liability and workers compensation",
+        "zoning": "Proper zoning for construction"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Contractor license",
+        "Safety compliance plan",
+        "Equipment inventory",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 300,
+        "annual": 600,
+        "inspection": 150
+      },
+      "timeline": "8-10 weeks",
+      "contact": {
+        "department": "Michigan Department of Licensing and Regulatory Affairs",
+        "phone": "(517) 241-9288",
+        "website": "https://www.michigan.gov/lara/bureaus/bpl/boards/construction",
+        "address": "611 W Ottawa St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "construction-safety",
+          "title": "Construction Safety Standards",
+          "duration": "4 hours",
+          "topics": [
+            "OSHA compliance",
+            "Safety equipment requirements",
+            "Hazard communication",
+            "Emergency procedures"
+          ]
+        },
+        {
+          "id": "construction-operations",
+          "title": "Construction Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Project management",
+            "Client communication",
+            "Permit requirements",
+            "Quality control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "healthcare-practice",
+      "name": "Healthcare Practice License",
+      "category": "healthcare",
+      "description": "License required to operate a medical practice or healthcare facility",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Medical license for practitioners",
+        "inspections": "Health Department and safety inspections",
+        "insurance": "Medical malpractice insurance",
+        "zoning": "Proper zoning for healthcare"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Medical licenses",
+        "Facility floor plan",
+        "Emergency procedures",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 500,
+        "annual": 1000,
+        "inspection": 200
+      },
+      "timeline": "10-12 weeks",
+      "contact": {
+        "department": "Michigan Department of Health and Human Services",
+        "phone": "(517) 373-3740",
+        "website": "https://www.michigan.gov/mdhhs/health-services/licensing",
+        "address": "333 S Grand Ave, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "healthcare-compliance",
+          "title": "Healthcare Compliance",
+          "duration": "4 hours",
+          "topics": [
+            "HIPAA compliance",
+            "Medical record keeping",
+            "Patient privacy",
+            "Safety protocols"
+          ]
+        },
+        {
+          "id": "healthcare-operations",
+          "title": "Healthcare Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Practice management",
+            "Insurance billing",
+            "Staff training",
+            "Quality assurance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "real-estate-broker",
+      "name": "Real Estate Broker License",
+      "category": "real-estate",
+      "description": "License required to operate a real estate brokerage",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Real estate broker license",
+        "inspections": "Office inspection required",
+        "insurance": "Errors and omissions insurance",
+        "zoning": "Proper zoning for office use"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Real estate broker license",
+        "Office floor plan",
+        "Trust account documentation",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 200,
+        "annual": 400,
+        "inspection": 100
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Michigan Department of Licensing and Regulatory Affairs",
+        "phone": "(517) 241-9288",
+        "website": "https://www.michigan.gov/lara/bureaus/bpl/real-estate",
+        "address": "611 W Ottawa St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "real-estate-laws",
+          "title": "Real Estate Laws and Ethics",
+          "duration": "3 hours",
+          "topics": [
+            "Fair housing laws",
+            "Contract requirements",
+            "Ethical standards",
+            "Disclosure requirements"
+          ]
+        },
+        {
+          "id": "brokerage-operations",
+          "title": "Brokerage Operations",
+          "duration": "2.5 hours",
+          "topics": [
+            "Office management",
+            "Agent supervision",
+            "Trust account management",
+            "Marketing strategies"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "financial-advisor",
+      "name": "Financial Advisor License",
+      "category": "financial",
+      "description": "License required to provide financial advisory services",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Series 7 or Series 65 license",
+        "inspections": "SEC/FINRA compliance review",
+        "insurance": "Professional liability insurance",
+        "zoning": "Proper zoning for office use"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Professional licenses",
+        "Compliance procedures",
+        "Client disclosure forms",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 300,
+        "annual": 600,
+        "inspection": 150
+      },
+      "timeline": "8-10 weeks",
+      "contact": {
+        "department": "Michigan Department of Insurance and Financial Services",
+        "phone": "(517) 335-3160",
+        "website": "https://www.michigan.gov/difs",
+        "address": "530 W Allegan St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "financial-compliance",
+          "title": "Financial Compliance",
+          "duration": "4 hours",
+          "topics": [
+            "SEC regulations",
+            "FINRA requirements",
+            "Client disclosure",
+            "Record keeping"
+          ]
+        },
+        {
+          "id": "financial-operations",
+          "title": "Financial Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Client relationship management",
+            "Investment strategies",
+            "Risk management",
+            "Marketing compliance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technology-consultant",
+      "name": "Technology Consultant License",
+      "category": "technology",
+      "description": "License required to provide technology consulting services",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Relevant certifications (optional but recommended)",
+        "inspections": "Office inspection required",
+        "insurance": "Professional liability insurance",
+        "zoning": "Proper zoning for office use"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Professional certifications",
+        "Service agreements",
+        "Data security plan",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 100,
+        "annual": 200,
+        "inspection": 50
+      },
+      "timeline": "4-6 weeks",
+      "contact": {
+        "department": "Michigan Department of Licensing and Regulatory Affairs",
+        "phone": "(517) 241-9288",
+        "website": "https://www.michigan.gov/lara/bureaus/bpl",
+        "address": "611 W Ottawa St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "tech-compliance",
+          "title": "Technology Compliance",
+          "duration": "2 hours",
+          "topics": [
+            "Data privacy laws",
+            "Cybersecurity requirements",
+            "Client confidentiality",
+            "Service agreements"
+          ]
+        },
+        {
+          "id": "tech-operations",
+          "title": "Technology Operations",
+          "duration": "2.5 hours",
+          "topics": [
+            "Project management",
+            "Client communication",
+            "Quality assurance",
+            "Business development"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "manufacturing-license",
+      "name": "Manufacturing License",
+      "category": "manufacturing",
+      "description": "License required to operate a manufacturing facility",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Industry-specific certifications",
+        "inspections": "Environmental and safety inspections",
+        "insurance": "General liability and workers compensation",
+        "zoning": "Industrial zoning required"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Environmental permits",
+        "Safety compliance plan",
+        "Equipment inventory",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 500,
+        "annual": 1000,
+        "inspection": 250
+      },
+      "timeline": "10-12 weeks",
+      "contact": {
+        "department": "Michigan Department of Environment, Great Lakes, and Energy",
+        "phone": "(517) 284-6700",
+        "website": "https://www.michigan.gov/egle",
+        "address": "525 W Allegan St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "manufacturing-safety",
+          "title": "Manufacturing Safety",
+          "duration": "4 hours",
+          "topics": [
+            "OSHA compliance",
+            "Equipment safety",
+            "Hazardous material handling",
+            "Emergency procedures"
+          ]
+        },
+        {
+          "id": "manufacturing-operations",
+          "title": "Manufacturing Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Quality control",
+            "Production planning",
+            "Supply chain management",
+            "Environmental compliance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entertainment-venue",
+      "name": "Entertainment Venue License",
+      "category": "entertainment",
+      "description": "License required to operate an entertainment venue or event space",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Event management experience",
+        "inspections": "Fire and safety inspections",
+        "insurance": "General liability and event insurance",
+        "zoning": "Proper zoning for entertainment"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Venue floor plan",
+        "Safety procedures",
+        "Event capacity limits",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 300,
+        "annual": 600,
+        "inspection": 150
+      },
+      "timeline": "8-10 weeks",
+      "contact": {
+        "department": "Detroit Department of Buildings, Safety Engineering, and Environmental",
+        "phone": "(313) 224-2737",
+        "website": "https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental",
+        "address": "2 Woodward Ave, Detroit, MI 48226"
+      },
+      "trainingModules": [
+        {
+          "id": "venue-safety",
+          "title": "Venue Safety Standards",
+          "duration": "3 hours",
+          "topics": [
+            "Crowd management",
+            "Emergency procedures",
+            "Security protocols",
+            "Accessibility requirements"
+          ]
+        },
+        {
+          "id": "venue-operations",
+          "title": "Venue Operations",
+          "duration": "2.5 hours",
+          "topics": [
+            "Event planning",
+            "Vendor coordination",
+            "Customer service",
+            "Marketing strategies"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "education-center",
+      "name": "Education Center License",
+      "category": "education",
+      "description": "License required to operate an educational or training center",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Educational credentials",
+        "inspections": "Safety and accessibility inspections",
+        "insurance": "General liability and professional liability",
+        "zoning": "Proper zoning for education"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Educational credentials",
+        "Curriculum documentation",
+        "Facility floor plan",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 200,
+        "annual": 400,
+        "inspection": 100
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Michigan Department of Education",
+        "phone": "(517) 373-3324",
+        "website": "https://www.michigan.gov/mde",
+        "address": "608 W Allegan St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "education-compliance",
+          "title": "Education Compliance",
+          "duration": "3 hours",
+          "topics": [
+            "Educational standards",
+            "Student safety",
+            "Record keeping",
+            "Accreditation requirements"
+          ]
+        },
+        {
+          "id": "education-operations",
+          "title": "Education Operations",
+          "duration": "2.5 hours",
+          "topics": [
+            "Curriculum development",
+            "Student assessment",
+            "Staff management",
+            "Marketing strategies"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pet-grooming",
+      "name": "Pet Grooming License",
+      "category": "pet-services",
+      "description": "License required to operate a pet grooming business",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Pet grooming certification (recommended)",
+        "inspections": "Health and safety inspections",
+        "insurance": "General liability and animal insurance",
+        "zoning": "Proper zoning for pet services"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Grooming certifications",
+        "Facility floor plan",
+        "Animal care procedures",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 100,
+        "annual": 200,
+        "inspection": 50
+      },
+      "timeline": "4-6 weeks",
+      "contact": {
+        "department": "Detroit Health Department",
+        "phone": "(313) 876-4000",
+        "website": "https://detroitmi.gov/departments/detroit-health-department",
+        "address": "100 Mack Ave, Detroit, MI 48201"
+      },
+      "trainingModules": [
+        {
+          "id": "pet-safety",
+          "title": "Pet Safety Standards",
+          "duration": "2 hours",
+          "topics": [
+            "Animal handling safety",
+            "Sanitation procedures",
+            "Emergency procedures",
+            "Client communication"
+          ]
+        },
+        {
+          "id": "grooming-operations",
+          "title": "Grooming Operations",
+          "duration": "1.5 hours",
+          "topics": [
+            "Grooming techniques",
+            "Equipment maintenance",
+            "Customer service",
+            "Business management"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "senior-care",
+      "name": "Senior Care License",
+      "category": "senior-services",
+      "description": "License required to operate a senior care facility",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Healthcare licenses for staff",
+        "inspections": "Health Department and safety inspections",
+        "insurance": "General liability and medical malpractice",
+        "zoning": "Proper zoning for healthcare"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Staff licenses",
+        "Facility floor plan",
+        "Care procedures",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 500,
+        "annual": 1000,
+        "inspection": 200
+      },
+      "timeline": "10-12 weeks",
+      "contact": {
+        "department": "Michigan Department of Health and Human Services",
+        "phone": "(517) 373-3740",
+        "website": "https://www.michigan.gov/mdhhs/health-services/licensing",
+        "address": "333 S Grand Ave, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "senior-care-safety",
+          "title": "Senior Care Safety",
+          "duration": "4 hours",
+          "topics": [
+            "Patient safety protocols",
+            "Emergency procedures",
+            "Medication management",
+            "Staff training requirements"
+          ]
+        },
+        {
+          "id": "senior-care-operations",
+          "title": "Senior Care Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Care planning",
+            "Family communication",
+            "Quality assurance",
+            "Regulatory compliance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "environmental-services",
+      "name": "Environmental Services License",
+      "category": "environmental",
+      "description": "License required to provide environmental services",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Environmental certifications",
+        "inspections": "Environmental compliance inspections",
+        "insurance": "General liability and environmental insurance",
+        "zoning": "Proper zoning for environmental services"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Environmental certifications",
+        "Compliance procedures",
+        "Safety protocols",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 300,
+        "annual": 600,
+        "inspection": 150
+      },
+      "timeline": "8-10 weeks",
+      "contact": {
+        "department": "Michigan Department of Environment, Great Lakes, and Energy",
+        "phone": "(517) 284-6700",
+        "website": "https://www.michigan.gov/egle",
+        "address": "525 W Allegan St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "environmental-compliance",
+          "title": "Environmental Compliance",
+          "duration": "4 hours",
+          "topics": [
+            "Environmental regulations",
+            "Waste management",
+            "Hazardous material handling",
+            "Reporting requirements"
+          ]
+        },
+        {
+          "id": "environmental-operations",
+          "title": "Environmental Operations",
+          "duration": "3 hours",
+          "topics": [
+            "Service delivery",
+            "Client communication",
+            "Quality control",
+            "Business development"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nonprofit-organization",
+      "name": "Nonprofit Organization Registration",
+      "category": "nonprofit",
+      "description": "Registration required to operate a nonprofit organization",
+      "requirements": {
+        "businessRegistration": "Michigan nonprofit corporation",
+        "professional": "Board of directors",
+        "inspections": "Annual compliance review",
+        "insurance": "General liability and directors insurance",
+        "zoning": "Proper zoning for office use"
+      },
+      "documents": [
+        "Nonprofit registration certificate",
+        "Board of directors list",
+        "Mission statement",
+        "Bylaws and policies",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 100,
+        "annual": 200,
+        "inspection": 50
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Michigan Department of Attorney General",
+        "phone": "(517) 373-1152",
+        "website": "https://www.michigan.gov/ag/charitable-trusts",
+        "address": "525 W Ottawa St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "nonprofit-compliance",
+          "title": "Nonprofit Compliance",
+          "duration": "3 hours",
+          "topics": [
+            "Nonprofit regulations",
+            "Tax compliance",
+            "Board governance",
+            "Transparency requirements"
+          ]
+        },
+        {
+          "id": "nonprofit-operations",
+          "title": "Nonprofit Operations",
+          "duration": "2.5 hours",
+          "topics": [
+            "Fundraising strategies",
+            "Volunteer management",
+            "Program development",
+            "Community engagement"
+          ]
+        }
+      ]
     }
   ],
   "trainingResources": {
@@ -410,6 +1292,20 @@
         "duration": "25 minutes",
         "url": "https://example.com/alcohol-service-training",
         "description": "Training for alcohol service and sales"
+      },
+      {
+        "id": "farmers-market-guide",
+        "title": "Farmers Market Success Guide",
+        "duration": "18 minutes",
+        "url": "https://example.com/farmers-market-guide",
+        "description": "How to succeed at Detroit farmers markets"
+      },
+      {
+        "id": "local-business-marketing",
+        "title": "Local Business Marketing",
+        "duration": "22 minutes",
+        "url": "https://example.com/local-business-marketing",
+        "description": "Marketing strategies for local businesses"
       }
     ],
     "checklists": [
@@ -427,6 +1323,16 @@
         "id": "timeline-planning",
         "title": "Application Timeline",
         "description": "Timeline planning for business license applications"
+      },
+      {
+        "id": "farmers-market-checklist",
+        "title": "Farmers Market Vendor Checklist",
+        "description": "Complete checklist for farmers market vendors"
+      },
+      {
+        "id": "local-business-startup",
+        "title": "Local Business Startup Guide",
+        "description": "Complete guide to starting a local business in Detroit"
       }
     ],
     "templates": [
@@ -444,6 +1350,16 @@
         "id": "inventory-template",
         "title": "Inventory Template",
         "description": "Template for tracking business inventory"
+      },
+      {
+        "id": "farmers-market-application",
+        "title": "Farmers Market Application",
+        "description": "Template for farmers market vendor applications"
+      },
+      {
+        "id": "local-business-profile",
+        "title": "Local Business Profile",
+        "description": "Template for creating local business profiles"
       }
     ]
   }

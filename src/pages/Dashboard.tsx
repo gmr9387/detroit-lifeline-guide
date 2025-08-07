@@ -89,6 +89,13 @@ export default function Dashboard() {
       urgent: false
     },
     {
+      title: 'Community Hub',
+      description: 'Local businesses & markets',
+      icon: '🏘️',
+      url: '/community',
+      urgent: false
+    },
+    {
       title: 'Job Training',
       description: 'Michigan Works! services',
       icon: '💼',

@@ -158,3 +158,85 @@ export interface BusinessLicenseApplication {
   notes?: string;
   estimatedCompletion?: string;
 }
+
+// Local Businesses and Community Types
+export interface Location {
+  address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface Hours {
+  monday?: string;
+  tuesday?: string;
+  wednesday?: string;
+  thursday?: string;
+  friday?: string;
+  saturday?: string;
+  sunday?: string;
+}
+
+export interface Contact {
+  phone: string;
+  website: string;
+  email: string;
+}
+
+export interface Owner {
+  name: string;
+  story: string;
+  yearsInBusiness: number;
+}
+
+export interface LocalBusiness {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  location: Location;
+  hours: Hours;
+  services: string[];
+  contact: Contact;
+  owner: Owner;
+  highlights: string[];
+}
+
+export interface VendorInfo {
+  applicationUrl: string;
+  fees: {
+    daily: number;
+    seasonal: number;
+  };
+  requirements: string[];
+}
+
+export interface FarmersMarket {
+  id: string;
+  name: string;
+  description: string;
+  location: Location;
+  hours: Hours;
+  season: string;
+  vendors: number;
+  categories: string[];
+  features: string[];
+  contact: Contact;
+  vendorInfo: VendorInfo;
+}
+
+export interface Demographics {
+  population: string;
+  averageIncome: string;
+  majorEmployers: string[];
+}
+
+export interface Area {
+  id: string;
+  name: string;
+  description: string;
+  highlights: string[];
+  businessOpportunities: string[];
+  demographics: Demographics;
+}
