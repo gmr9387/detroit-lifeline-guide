@@ -1,0 +1,450 @@
+{
+  "categories": [
+    {
+      "id": "food-service",
+      "name": "Food Service & Restaurants",
+      "icon": "utensils",
+      "description": "Restaurants, food trucks, catering, and food-related businesses"
+    },
+    {
+      "id": "retail",
+      "name": "Retail & Sales",
+      "icon": "shopping-bag",
+      "description": "Grocery stores, convenience stores, and retail businesses"
+    },
+    {
+      "id": "alcohol",
+      "name": "Alcohol & Liquor",
+      "icon": "wine",
+      "description": "Liquor stores, bars, and businesses selling alcohol"
+    },
+    {
+      "id": "professional",
+      "name": "Professional Services",
+      "icon": "briefcase",
+      "description": "Consulting, professional services, and specialized businesses"
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare & Wellness",
+      "icon": "heart",
+      "description": "Medical practices, wellness centers, and healthcare services"
+    },
+    {
+      "id": "automotive",
+      "name": "Automotive & Transportation",
+      "icon": "car",
+      "description": "Auto repair, transportation services, and vehicle-related businesses"
+    }
+  ],
+  "licenses": [
+    {
+      "id": "restaurant-license",
+      "name": "Restaurant License",
+      "category": "food-service",
+      "description": "License required to operate a restaurant or food service establishment",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "foodSafety": "Food Safety Manager Certification",
+        "inspections": "Health Department inspection required",
+        "insurance": "General liability insurance",
+        "zoning": "Proper zoning for food service"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Food Safety Manager certificate",
+        "Floor plan of establishment",
+        "Menu with all food items",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 150,
+        "annual": 300,
+        "inspection": 75
+      },
+      "timeline": "4-6 weeks",
+      "contact": {
+        "department": "Detroit Health Department",
+        "phone": "(313) 876-4000",
+        "website": "https://detroitmi.gov/departments/detroit-health-department",
+        "address": "100 Mack Ave, Detroit, MI 48201"
+      },
+      "trainingModules": [
+        {
+          "id": "food-safety-basics",
+          "title": "Food Safety Fundamentals",
+          "duration": "2 hours",
+          "topics": [
+            "Personal hygiene requirements",
+            "Food storage and handling",
+            "Temperature control",
+            "Cross-contamination prevention",
+            "Cleaning and sanitizing procedures"
+          ]
+        },
+        {
+          "id": "restaurant-inspections",
+          "title": "Preparing for Health Inspections",
+          "duration": "1.5 hours",
+          "topics": [
+            "What inspectors look for",
+            "Common violations to avoid",
+            "Documentation requirements",
+            "Corrective action procedures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grocery-store-license",
+      "name": "Grocery Store License",
+      "category": "retail",
+      "description": "License required to operate a grocery store or food retail establishment",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "foodSafety": "Food Safety Manager Certification",
+        "inspections": "Health Department and Fire Department inspections",
+        "insurance": "General liability and property insurance",
+        "zoning": "Commercial zoning for retail"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Food Safety Manager certificate",
+        "Store layout and floor plan",
+        "Inventory list",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 200,
+        "annual": 400,
+        "inspection": 100
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Detroit Health Department",
+        "phone": "(313) 876-4000",
+        "website": "https://detroitmi.gov/departments/detroit-health-department",
+        "address": "100 Mack Ave, Detroit, MI 48201"
+      },
+      "trainingModules": [
+        {
+          "id": "grocery-safety",
+          "title": "Grocery Store Safety Standards",
+          "duration": "2.5 hours",
+          "topics": [
+            "Food storage and rotation",
+            "Expiration date management",
+            "Refrigeration requirements",
+            "Pest control measures",
+            "Employee training requirements"
+          ]
+        },
+        {
+          "id": "retail-operations",
+          "title": "Retail Operations Best Practices",
+          "duration": "2 hours",
+          "topics": [
+            "Inventory management",
+            "Customer service standards",
+            "Security measures",
+            "Cash handling procedures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "liquor-license",
+      "name": "Liquor License",
+      "category": "alcohol",
+      "description": "License required to sell alcoholic beverages in Detroit",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "age": "21+ years old",
+        "background": "Criminal background check",
+        "inspections": "Multiple agency inspections required",
+        "insurance": "Liquor liability insurance",
+        "zoning": "Proper zoning for alcohol sales"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Personal history form",
+        "Financial statements",
+        "Floor plan with alcohol display areas",
+        "Proof of insurance",
+        "Zoning compliance letter",
+        "Background check results"
+      ],
+      "fees": {
+        "application": 500,
+        "annual": 1000,
+        "background": 75,
+        "inspection": 150
+      },
+      "timeline": "8-12 weeks",
+      "contact": {
+        "department": "Michigan Liquor Control Commission",
+        "phone": "(517) 322-1400",
+        "website": "https://www.michigan.gov/lara/bureaus/llc",
+        "address": "525 W Allegan St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "alcohol-laws",
+          "title": "Michigan Alcohol Laws",
+          "duration": "3 hours",
+          "topics": [
+            "Legal drinking age requirements",
+            "Hours of sale restrictions",
+            "Prohibited sales practices",
+            "Employee training requirements",
+            "Penalties for violations"
+          ]
+        },
+        {
+          "id": "responsible-vending",
+          "title": "Responsible Alcohol Service",
+          "duration": "2 hours",
+          "topics": [
+            "Identifying fake IDs",
+            "Recognizing intoxication",
+            "Refusing service procedures",
+            "Documentation requirements"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "food-truck-license",
+      "name": "Food Truck License",
+      "category": "food-service",
+      "description": "License required to operate a food truck or mobile food service",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "foodSafety": "Food Safety Manager Certification",
+        "vehicle": "Vehicle inspection and registration",
+        "insurance": "Vehicle and general liability insurance",
+        "permits": "Mobile food service permit"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Food Safety Manager certificate",
+        "Vehicle registration and insurance",
+        "Truck layout and equipment list",
+        "Menu with all food items",
+        "Route and location plans"
+      ],
+      "fees": {
+        "application": 100,
+        "annual": 250,
+        "vehicle": 50,
+        "inspection": 75
+      },
+      "timeline": "3-4 weeks",
+      "contact": {
+        "department": "Detroit Health Department",
+        "phone": "(313) 876-4000",
+        "website": "https://detroitmi.gov/departments/detroit-health-department",
+        "address": "100 Mack Ave, Detroit, MI 48201"
+      },
+      "trainingModules": [
+        {
+          "id": "mobile-food-safety",
+          "title": "Mobile Food Service Safety",
+          "duration": "2 hours",
+          "topics": [
+            "Mobile kitchen requirements",
+            "Food storage in limited space",
+            "Waste disposal procedures",
+            "Location and parking regulations"
+          ]
+        },
+        {
+          "id": "food-truck-operations",
+          "title": "Food Truck Operations",
+          "duration": "1.5 hours",
+          "topics": [
+            "Route planning and scheduling",
+            "Equipment maintenance",
+            "Weather considerations",
+            "Customer service on the go"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "barber-cosmetology",
+      "name": "Barber/Cosmetology License",
+      "category": "professional",
+      "description": "License required to operate a barber shop or cosmetology business",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Individual professional license",
+        "inspections": "Board of Cosmetology inspection",
+        "insurance": "Professional liability insurance",
+        "zoning": "Proper zoning for personal services"
+      },
+      "documents": [
+        "Business registration certificate",
+        "Individual professional license",
+        "Shop layout and floor plan",
+        "Equipment and product list",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 75,
+        "annual": 150,
+        "inspection": 50
+      },
+      "timeline": "4-6 weeks",
+      "contact": {
+        "department": "Michigan Board of Cosmetology",
+        "phone": "(517) 241-0199",
+        "website": "https://www.michigan.gov/lara/bureaus/bpl/cosmetology",
+        "address": "611 W Ottawa St, Lansing, MI 48933"
+      },
+      "trainingModules": [
+        {
+          "id": "sanitation-standards",
+          "title": "Sanitation and Safety Standards",
+          "duration": "2 hours",
+          "topics": [
+            "Tool sterilization procedures",
+            "Workstation sanitation",
+            "Chemical safety",
+            "Client safety protocols"
+          ]
+        },
+        {
+          "id": "business-practices",
+          "title": "Professional Business Practices",
+          "duration": "1.5 hours",
+          "topics": [
+            "Client consultation procedures",
+            "Record keeping requirements",
+            "Professional ethics",
+            "Marketing and customer service"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auto-repair-license",
+      "name": "Auto Repair License",
+      "category": "automotive",
+      "description": "License required to operate an automotive repair business",
+      "requirements": {
+        "businessRegistration": "Michigan LLC or Corporation",
+        "professional": "Automotive Service Excellence (ASE) certification",
+        "inspections": "Environmental and safety inspections",
+        "insurance": "General liability and garage liability insurance",
+        "zoning": "Proper zoning for automotive services"
+      },
+      "documents": [
+        "Business registration certificate",
+        "ASE certification",
+        "Shop layout and equipment list",
+        "Environmental compliance plan",
+        "Proof of insurance",
+        "Zoning compliance letter"
+      ],
+      "fees": {
+        "application": 200,
+        "annual": 400,
+        "inspection": 100
+      },
+      "timeline": "6-8 weeks",
+      "contact": {
+        "department": "Michigan Department of State",
+        "phone": "(517) 241-6850",
+        "website": "https://www.michigan.gov/sos/businesses/auto-repair",
+        "address": "430 W Allegan St, Lansing, MI 48918"
+      },
+      "trainingModules": [
+        {
+          "id": "auto-repair-safety",
+          "title": "Automotive Repair Safety",
+          "duration": "2.5 hours",
+          "topics": [
+            "Shop safety protocols",
+            "Hazardous material handling",
+            "Environmental compliance",
+            "Equipment safety standards"
+          ]
+        },
+        {
+          "id": "customer-service-auto",
+          "title": "Auto Repair Customer Service",
+          "duration": "2 hours",
+          "topics": [
+            "Estimate procedures",
+            "Communication with customers",
+            "Warranty requirements",
+            "Dispute resolution"
+          ]
+        }
+      ]
+    }
+  ],
+  "trainingResources": {
+    "videos": [
+      {
+        "id": "business-license-overview",
+        "title": "Business License Overview",
+        "duration": "15 minutes",
+        "url": "https://example.com/business-license-overview",
+        "description": "General overview of business licensing in Detroit"
+      },
+      {
+        "id": "food-safety-basics",
+        "title": "Food Safety Basics",
+        "duration": "20 minutes",
+        "url": "https://example.com/food-safety-basics",
+        "description": "Essential food safety practices for food service businesses"
+      },
+      {
+        "id": "alcohol-service-training",
+        "title": "Responsible Alcohol Service",
+        "duration": "25 minutes",
+        "url": "https://example.com/alcohol-service-training",
+        "description": "Training for alcohol service and sales"
+      }
+    ],
+    "checklists": [
+      {
+        "id": "pre-inspection-checklist",
+        "title": "Pre-Inspection Checklist",
+        "description": "Complete checklist to prepare for business inspections"
+      },
+      {
+        "id": "document-gathering",
+        "title": "Document Gathering Guide",
+        "description": "Step-by-step guide to gather all required documents"
+      },
+      {
+        "id": "timeline-planning",
+        "title": "Application Timeline",
+        "description": "Timeline planning for business license applications"
+      }
+    ],
+    "templates": [
+      {
+        "id": "business-plan-template",
+        "title": "Business Plan Template",
+        "description": "Template for creating a business plan"
+      },
+      {
+        "id": "floor-plan-template",
+        "title": "Floor Plan Template",
+        "description": "Template for creating business floor plans"
+      },
+      {
+        "id": "inventory-template",
+        "title": "Inventory Template",
+        "description": "Template for tracking business inventory"
+      }
+    ]
+  }
+}
