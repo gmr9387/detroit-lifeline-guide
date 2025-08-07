@@ -1,0 +1,200 @@
+{
+  "name": "Detroit Navigator - Social Services Guide",
+  "short_name": "Detroit Navigator",
+  "description": "Find and apply for social services, assistance programs, and community resources in Detroit, Michigan",
+  "version": "1.0.0",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#1e40af",
+  "background_color": "#ffffff",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": [
+    "government",
+    "social",
+    "utilities",
+    "lifestyle",
+    "productivity"
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-mobile-1.png",
+      "type": "image/png",
+      "sizes": "375x812",
+      "form_factor": "narrow",
+      "label": "Dashboard with personalized recommendations"
+    },
+    {
+      "src": "/images/screenshot-mobile-2.png",
+      "type": "image/png",
+      "sizes": "375x812",
+      "form_factor": "narrow",
+      "label": "Browse available programs and services"
+    },
+    {
+      "src": "/images/screenshot-desktop-1.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "label": "Desktop view of program search"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search Programs",
+      "short_name": "Search",
+      "description": "Find assistance programs and services",
+      "url": "/programs",
+      "icons": [
+        {
+          "src": "/icons/search-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "My Applications",
+      "short_name": "Applications",
+      "description": "View your program applications",
+      "url": "/dashboard?tab=applications",
+      "icons": [
+        {
+          "src": "/icons/applications-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Emergency Services",
+      "short_name": "Emergency",
+      "description": "Find emergency assistance",
+      "url": "/programs?category=emergency",
+      "icons": [
+        {
+          "src": "/icons/emergency-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Nearby Offices",
+      "short_name": "Offices",
+      "description": "Find service offices near you",
+      "url": "/offices",
+      "icons": [
+        {
+          "src": "/icons/location-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+detroit",
+      "url": "/program/%s"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "scope_extensions": [
+    {
+      "origin": "https://www.detroitmi.gov"
+    },
+    {
+      "origin": "https://www.michigan.gov"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/import-data",
+      "accept": {
+        "application/json": [".json"],
+        "text/csv": [".csv"]
+      }
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.detroit.navigator",
+      "id": "com.detroit.navigator"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/detroit-navigator/id123456789"
+    }
+  ]
+}

@@ -1,0 +1,462 @@
+/* Detroit Navigator - Motor City Style */
+/* Inspired by Detroit's iconic design, culture, and innovation */
+
+:root {
+  /* Detroit Color Palette */
+  --detroit-blue: #004a77;
+  --detroit-gold: #d4af37;
+  --detroit-red: #dc143c;
+  --detroit-silver: #c0c0c0;
+  --detroit-black: #0a0a0a;
+  --detroit-white: #ffffff;
+  
+  /* Motor City Accent Colors */
+  --motown-purple: #663399;
+  --techno-cyan: #00ffff;
+  --auto-chrome: #e8e8e8;
+  --factory-steel: #4a5568;
+  --renaissance-green: #2d5016;
+  
+  /* Modern Detroit Gradients */
+  --detroit-gradient-primary: linear-gradient(135deg, var(--detroit-blue) 0%, var(--motown-purple) 100%);
+  --detroit-gradient-secondary: linear-gradient(135deg, var(--detroit-gold) 0%, var(--detroit-red) 100%);
+  --detroit-gradient-accent: linear-gradient(45deg, var(--techno-cyan) 0%, var(--detroit-blue) 100%);
+  --detroit-gradient-hero: linear-gradient(135deg, var(--detroit-black) 0%, var(--detroit-blue) 50%, var(--motown-purple) 100%);
+  
+  /* Typography - Motor City Style */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-heading: 'Montserrat', 'Arial', sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-accent: 'Orbitron', 'Monaco', monospace;
+  
+  /* Spacing - Clean Motor City Lines */
+  --space-unit: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  
+  /* Shadows - Industrial Depth */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 74, 119, 0.2);
+  --shadow-xl: 0 16px 64px rgba(0, 74, 119, 0.25);
+  --shadow-detroit: 0 20px 80px rgba(0, 0, 0, 0.3);
+  
+  /* Animations - Smooth Motor Movement */
+  --transition-fast: 0.15s ease-out;
+  --transition-base: 0.25s ease-out;
+  --transition-slow: 0.4s ease-out;
+}
+
+/* Detroit Hero Section */
+.detroit-hero {
+  background: var(--detroit-gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.detroit-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="detroit-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23detroit-pattern)"/></svg>');
+  opacity: 0.3;
+}
+
+/* Motor City Cards */
+.detroit-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.detroit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--detroit-gradient-primary);
+}
+
+.detroit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--detroit-blue);
+}
+
+/* Fly Detroit Buttons */
+.btn-detroit-primary {
+  background: var(--detroit-gradient-primary);
+  color: var(--detroit-white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-detroit-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-detroit-primary:hover::before {
+  left: 100%;
+}
+
+.btn-detroit-secondary {
+  background: transparent;
+  color: var(--detroit-blue);
+  border: 2px solid var(--detroit-blue);
+  border-radius: var(--border-radius-md);
+  padding: 10px 22px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.btn-detroit-secondary:hover {
+  background: var(--detroit-blue);
+  color: var(--detroit-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Motor City Typography */
+.detroit-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  background: var(--detroit-gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+
+.detroit-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300;
+  color: var(--factory-steel);
+  margin-bottom: 2rem;
+}
+
+.detroit-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--detroit-blue);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.detroit-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--detroit-gradient-secondary);
+  border-radius: 2px;
+}
+
+/* Category Icons - Motor City Style */
+.detroit-category-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-lg);
+  background: var(--detroit-gradient-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--detroit-white);
+  font-size: 24px;
+  margin-bottom: 1rem;
+  transition: all var(--transition-base);
+}
+
+.detroit-category-card:hover .detroit-category-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Program Cards - Fly Detroit Style */
+.detroit-program-card {
+  background: var(--detroit-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  transition: all var(--transition-base);
+  border-left: 4px solid var(--detroit-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.detroit-program-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: var(--detroit-gradient-accent);
+  opacity: 0;
+  transform: rotate(45deg);
+  transition: opacity var(--transition-slow);
+}
+
+.detroit-program-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-detroit);
+  border-left-color: var(--detroit-red);
+}
+
+.detroit-program-card:hover::before {
+  opacity: 0.05;
+}
+
+/* Navigation - Motor City Clean */
+.detroit-nav {
+  background: rgba(0, 74, 119, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detroit-nav-link {
+  color: var(--detroit-white);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.detroit-nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--detroit-gold);
+  transition: all var(--transition-base);
+  transform: translateX(-50%);
+}
+
+.detroit-nav-link:hover::before,
+.detroit-nav-link.active::before {
+  width: 80%;
+}
+
+.detroit-nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--detroit-gold);
+}
+
+/* Status Badges - Motor City Flair */
+.detroit-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--border-radius-xl);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detroit-badge-success {
+  background: var(--renaissance-green);
+  color: var(--detroit-white);
+}
+
+.detroit-badge-warning {
+  background: var(--detroit-gold);
+  color: var(--detroit-black);
+}
+
+.detroit-badge-info {
+  background: var(--techno-cyan);
+  color: var(--detroit-black);
+}
+
+.detroit-badge-primary {
+  background: var(--detroit-blue);
+  color: var(--detroit-white);
+}
+
+/* Loading Animation - Motor City Smooth */
+.detroit-loading {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 74, 119, 0.3);
+  border-top: 3px solid var(--detroit-blue);
+  border-radius: 50%;
+  animation: detroit-spin 1s linear infinite;
+}
+
+@keyframes detroit-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Form Elements - Motor City Polish */
+.detroit-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(0, 74, 119, 0.2);
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: all var(--transition-base);
+  background: var(--detroit-white);
+}
+
+.detroit-input:focus {
+  outline: none;
+  border-color: var(--detroit-blue);
+  box-shadow: 0 0 0 3px rgba(0, 74, 119, 0.1);
+  transform: translateY(-1px);
+}
+
+.detroit-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Motor City Animations */
+.detroit-fade-in {
+  animation: detroit-fade-in 0.8s ease-out;
+}
+
+@keyframes detroit-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detroit-slide-in {
+  animation: detroit-slide-in 0.6s ease-out;
+}
+
+@keyframes detroit-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Detroit Style */
+@media (max-width: 768px) {
+  .detroit-title {
+    font-size: 2.5rem;
+  }
+  
+  .detroit-card {
+    margin-bottom: 1rem;
+  }
+  
+  .detroit-program-card {
+    padding: 1rem;
+  }
+}
+
+/* Dark Mode - Motor City Night */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --detroit-white: #0f0f0f;
+    --detroit-black: #ffffff;
+    --factory-steel: #e2e8f0;
+  }
+  
+  .detroit-card {
+    background: rgba(15, 15, 15, 0.95);
+    color: var(--detroit-white);
+  }
+  
+  .detroit-program-card {
+    background: #1a1a1a;
+    color: var(--detroit-white);
+  }
+}
+
+/* Motor City Utility Classes */
+.detroit-gradient-text {
+  background: var(--detroit-gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.detroit-shadow {
+  box-shadow: var(--shadow-detroit);
+}
+
+.detroit-border-gradient {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--detroit-white), var(--detroit-white)) padding-box,
+              var(--detroit-gradient-primary) border-box;
+}
+
+/* Accessibility - Motor City Inclusive */
+.detroit-focus-visible:focus-visible {
+  outline: 2px solid var(--detroit-gold);
+  outline-offset: 2px;
+}
+
+.detroit-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

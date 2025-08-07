@@ -3,9 +3,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { storageUtils } from '@/utils/localStorage';
+import storageService from '@/services/storage';
+import detroitAPI from '@/services/api';
+import geolocationService from '@/services/geolocation';
+import { useI18n } from '@/services/i18n';
 import { UserProfile, Program, Application } from '@/types';
-import detroitResources from '@/data/detroitResources.json';
 import { 
   Bell, 
   Clock, 
@@ -22,28 +24,62 @@ import { AppLayout } from '@/components/layout/AppLayout';
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { t, formatDate } = useI18n();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [recommendations, setRecommendations] = useState<Program[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const userProfile = storageUtils.getUserProfile();
-    if (!userProfile) {
-      navigate('/onboarding');
-      return;
-    }
+    const loadDashboardData = async () => {
+      try {
+        setLoading(true);
+        
+        // Get user profile
+        const userProfile = await storageService.getUserProfile();
+        if (!userProfile) {
+          navigate('/onboarding');
+          return;
+        }
 
-    setProfile(userProfile);
-    setApplications(storageUtils.getApplications());
-    
-    // Generate personalized recommendations
-    const allPrograms = detroitResources.programs as Program[];
-    const personalizedPrograms = allPrograms.filter(program => 
-      userProfile.primaryNeeds.includes(program.category)
-    ).slice(0, 4);
-    
-    setRecommendations(personalizedPrograms);
-  }, [navigate]);
+        setProfile(userProfile);
+        
+        // Get applications
+        const userApplications = await storageService.getApplications();
+        setApplications(userApplications);
+        
+        // Get personalized recommendations using new API
+        const programsResponse = await detroitAPI.getPrograms({
+          category: userProfile.primaryNeeds[0],
+          zipCode: userProfile.zipCode,
+          income: userProfile.income,
+          hasChildren: userProfile.hasChildren
+        });
+        
+        if (programsResponse.success) {
+          setRecommendations(programsResponse.data.slice(0, 4));
+        }
+        
+        // Get location-based recommendations if available
+        try {
+          const location = await geolocationService.getCurrentLocation();
+          const locationRecommendations = await geolocationService.getLocationBasedRecommendations(location);
+          console.log('Location-based recommendations:', locationRecommendations);
+        } catch (locationError) {
+          console.log('Location not available:', locationError);
+        }
+        
+      } catch (err) {
+        setError(t('error.serverError'));
+        console.error('Dashboard loading error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboardData();
+  }, [navigate, t]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();

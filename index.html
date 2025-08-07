@@ -3,22 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detroit Resource Navigator</title>
-    <meta name="description" content="Find government services, social programs, and community resources in Detroit. Get personalized help for your family's needs." />
-    <meta name="author" content="Detroit Resource Navigator" />
+    <meta name="theme-color" content="#1e40af" />
+    <title>Detroit Navigator - Social Services Guide</title>
+    <meta name="description" content="Find and apply for social services, assistance programs, and community resources in Detroit, Michigan" />
+    <meta name="author" content="Detroit Navigator" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" href="/icons/icon-192x192.png" />
+    
+    <!-- Apple iOS Support -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Detroit Navigator" />
+    
+    <!-- Microsoft Windows Support -->
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-TileColor" content="#1e40af" />
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:;
+      style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+      font-src 'self' fonts.gstatic.com;
+      img-src 'self' data: blob: https:;
+      connect-src 'self' https://*.detroitmi.gov https://*.michigan.gov https://api.211.org https://www.benefits.gov;
+      manifest-src 'self';
+      worker-src 'self' blob:;
+    " />
 
-    <meta property="og:title" content="Detroit Resource Navigator" />
-    <meta property="og:description" content="Find government services, social programs, and community resources in Detroit. Get personalized help for your family's needs." />
+    <meta property="og:title" content="Detroit Navigator - Social Services Guide" />
+    <meta property="og:description" content="Find and apply for social services, assistance programs, and community resources in Detroit, Michigan" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="Detroit Navigator" />
+    <meta name="twitter:description" content="Find social services and assistance programs in Detroit" />
+    <meta name="twitter:image" content="/icons/icon-512x512.png" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                if (newWorker) {
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // New content is available, show update notification
+                      if (confirm('New version available! Reload to update?')) {
+                        window.location.reload();
+                      }
+                    }
+                  });
+                }
+              });
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+        
+        // Listen for messages from service worker
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if (event.data && event.data.type === 'INSTALL_AVAILABLE') {
+            // Show install prompt
+            const installBanner = document.createElement('div');
+            installBanner.innerHTML = `
+              <div style="position: fixed; top: 0; left: 0; right: 0; background: #1e40af; color: white; padding: 12px; text-align: center; z-index: 1000;">
+                Install Detroit Navigator for faster access and offline use
+                <button onclick="this.parentElement.parentElement.remove()" style="margin-left: 10px; background: white; color: #1e40af; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                  Install
+                </button>
+                <button onclick="this.parentElement.parentElement.remove()" style="margin-left: 5px; background: transparent; color: white; border: 1px solid white; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                  Later
+                </button>
+              </div>
+            `;
+            document.body.appendChild(installBanner);
+          }
+        });
+      }
+      
+      // Install prompt handling
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+      
+      // Offline notification
+      window.addEventListener('online', () => {
+        const offlineNotification = document.getElementById('offline-notification');
+        if (offlineNotification) {
+          offlineNotification.remove();
+        }
+      });
+      
+      window.addEventListener('offline', () => {
+        const notification = document.createElement('div');
+        notification.id = 'offline-notification';
+        notification.innerHTML = `
+          <div style="position: fixed; bottom: 20px; left: 20px; right: 20px; background: #f59e0b; color: white; padding: 12px; border-radius: 8px; text-align: center; z-index: 1000;">
+            You're currently offline. Some features may not be available.
+          </div>
+        `;
+        document.body.appendChild(notification);
+      });
+    </script>
   </body>
 </html>

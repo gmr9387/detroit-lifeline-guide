@@ -6,9 +6,10 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AppLayout } from '@/components/layout/AppLayout';
-import detroitResources from '@/data/detroitResources.json';
+import storageService from '@/services/storage';
+import detroitAPI from '@/services/api';
+import { useI18n } from '@/services/i18n';
 import { Program, Application } from '@/types';
-import { storageUtils } from '@/utils/localStorage';
 import { 
   ArrowLeft, 
   Phone, 
@@ -29,39 +30,64 @@ import {
 export default function ProgramDetail() {
   const { programId } = useParams<{ programId: string }>();
   const navigate = useNavigate();
+  const { t } = useI18n();
   const [program, setProgram] = useState<Program | null>(null);
   const [checkedDocuments, setCheckedDocuments] = useState<string[]>([]);
   const [isFavorited, setIsFavorited] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!programId) {
-      navigate('/programs');
-      return;
-    }
+    const loadProgramData = async () => {
+      if (!programId) {
+        navigate('/programs');
+        return;
+      }
 
-    const allPrograms = detroitResources.programs as Program[];
-    const foundProgram = allPrograms.find(p => p.id === programId);
-    
-    if (!foundProgram) {
-      navigate('/programs');
-      return;
-    }
+      try {
+        setLoading(true);
+        
+        // Get all programs and find the specific one
+        const programsResponse = await detroitAPI.getPrograms();
+        if (!programsResponse.success) {
+          throw new Error('Failed to load programs');
+        }
+        
+        const foundProgram = programsResponse.data.find(p => p.id === programId);
+        if (!foundProgram) {
+          navigate('/programs');
+          return;
+        }
 
-    setProgram(foundProgram);
-    
-    const favorites = storageUtils.getFavorites();
-    setIsFavorited(favorites.includes(programId));
-  }, [programId, navigate]);
+        setProgram(foundProgram);
+        
+        // Check if it's in favorites
+        const favorites = await storageService.getFavorites();
+        setIsFavorited(favorites.includes(programId));
+      } catch (err) {
+        setError(t('error.serverError'));
+        console.error('Failed to load program details:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const toggleFavorite = () => {
+    loadProgramData();
+  }, [programId, navigate, t]);
+
+  const toggleFavorite = async () => {
     if (!program) return;
     
-    if (isFavorited) {
-      storageUtils.removeFromFavorites(program.id);
-    } else {
-      storageUtils.addToFavorites(program.id);
+    try {
+      if (isFavorited) {
+        await storageService.removeFromFavorites(program.id);
+      } else {
+        await storageService.addToFavorites(program.id);
+      }
+      setIsFavorited(!isFavorited);
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
     }
-    setIsFavorited(!isFavorited);
   };
 
   const toggleDocument = (document: string) => {
@@ -72,28 +98,33 @@ export default function ProgramDetail() {
     );
   };
 
-  const handleSaveApplication = () => {
+  const handleSaveApplication = async () => {
     if (!program) return;
 
-    const application: Application = {
-      id: crypto.randomUUID(),
-      programId: program.id,
-      programName: program.name,
-      status: 'saved',
-      appliedAt: new Date().toISOString(),
-      documentsChecked: checkedDocuments,
-      notes: 'Application saved for later completion'
-    };
+    try {
+      const application: Application = {
+        id: crypto.randomUUID(),
+        programId: program.id,
+        programName: program.name,
+        status: 'saved',
+        appliedAt: new Date().toISOString(),
+        documentsChecked: checkedDocuments,
+        notes: 'Application saved for later completion'
+      };
 
-    storageUtils.saveApplication(application);
-    
-    // Show success message and navigate
-    navigate('/dashboard');
+      await storageService.saveApplication(application);
+      
+      // Show success message and navigate
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Failed to save application:', error);
+    }
   };
 
   const getCategoryName = (categoryId: string) => {
-    const categories = detroitResources.categories;
-    return categories.find(cat => cat.id === categoryId)?.name || categoryId;
+    // This would need to be updated to use the categories from state
+    // For now, return the categoryId directly
+    return categoryId;
   };
 
   if (!program) {
