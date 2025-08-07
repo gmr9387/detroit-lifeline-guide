@@ -132,6 +132,18 @@ const translations: Record<string, Partial<TranslationKeys>> = {
     'category.utilities': 'Utility & Energy',
     'category.financial': 'Financial & Banking',
     'category.business': 'Entrepreneurship',
+    'category.credit': 'Credit Education & Repair',
+    'category.education': 'Education & Training',
+    'category.legal': 'Legal Services',
+    'category.transportation': 'Transportation',
+    'category.mental-health': 'Mental Health',
+    'category.medical': 'Medical Services',
+    'category.culture': 'Arts & Culture',
+    'category.emergency': 'Emergency Services',
+    'category.technology': 'Technology & Digital',
+    'category.seniors': 'Senior Services',
+    'category.veterans': 'Veterans Services',
+    'category.youth': 'Youth Programs',
     
     // Form validation
     'validation.required': 'This field is required',
@@ -205,6 +217,18 @@ const translations: Record<string, Partial<TranslationKeys>> = {
     'category.utilities': 'Servicios Públicos y Energía',
     'category.financial': 'Financiero y Bancario',
     'category.business': 'Emprendimiento',
+    'category.credit': 'Educación y Reparación de Crédito',
+    'category.education': 'Educación y Capacitación',
+    'category.legal': 'Servicios Legales',
+    'category.transportation': 'Transporte',
+    'category.mental-health': 'Salud Mental',
+    'category.medical': 'Servicios Médicos',
+    'category.culture': 'Arte y Cultura',
+    'category.emergency': 'Servicios de Emergencia',
+    'category.technology': 'Tecnología y Digital',
+    'category.seniors': 'Servicios para Adultos Mayores',
+    'category.veterans': 'Servicios para Veteranos',
+    'category.youth': 'Programas Juveniles',
     
     // Form validation
     'validation.required': 'Este campo es obligatorio',
@@ -270,7 +294,19 @@ const translations: Record<string, Partial<TranslationKeys>> = {
     'category.food': 'الغذاء والتغذية',
     'category.utilities': 'المرافق والطاقة',
     'category.financial': 'المالية والمصرفية',
-    'category.business': 'ريادة الأعمال'
+    'category.business': 'ريادة الأعمال',
+    'category.credit': 'التعليم المالي وإصلاح الائتمان',
+    'category.education': 'التعليم والتدريب',
+    'category.legal': 'الخدمات القانونية',
+    'category.transportation': 'النقل',
+    'category.mental-health': 'الصحة النفسية',
+    'category.medical': 'الخدمات الطبية',
+    'category.culture': 'الفنون والثقافة',
+    'category.emergency': 'خدمات الطوارئ',
+    'category.technology': 'التكنولوجيا والرقمية',
+    'category.seniors': 'خدمات كبار السن',
+    'category.veterans': 'خدمات المحاربين القدامى',
+    'category.youth': 'برامج الشباب'
   }
 };
 
