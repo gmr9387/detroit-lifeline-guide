@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -6,7 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AppLayout } from '@/components/layout/AppLayout';
-import detroitResources from '@/data/detroitResources.json';
+import detroitAPI from '@/services/api';
+import storageService from '@/services/storage';
+import { useI18n } from '@/services/i18n';
 import { Program, ResourceCategory } from '@/types';
 import { 
   Search, 
@@ -18,19 +20,53 @@ import {
   ArrowRight,
   Heart
 } from 'lucide-react';
-import { storageUtils } from '@/utils/localStorage';
+
 
 export default function Programs() {
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get('category') || '';
+  const { t } = useI18n();
   
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [showFilters, setShowFilters] = useState(false);
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [categories, setCategories] = useState<ResourceCategory[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const favorites = storageUtils.getFavorites();
-  const categories = detroitResources.categories as ResourceCategory[];
-  const programs = detroitResources.programs as Program[];
+  // Load data using new API services
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        
+        const [programsResponse, categoriesResponse, userFavorites] = await Promise.all([
+          detroitAPI.getPrograms({ category: selectedCategory }),
+          detroitAPI.getCategories(),
+          storageService.getFavorites()
+        ]);
+
+        if (programsResponse.success) {
+          setPrograms(programsResponse.data);
+        }
+        
+        if (categoriesResponse.success) {
+          setCategories(categoriesResponse.data);
+        }
+        
+        setFavorites(userFavorites);
+      } catch (err) {
+        setError(t('error.serverError'));
+        console.error('Failed to load programs:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [selectedCategory, t]);
 
   const filteredPrograms = useMemo(() => {
     let filtered = programs;
@@ -53,14 +89,18 @@ export default function Programs() {
     return filtered;
   }, [programs, selectedCategory, searchQuery]);
 
-  const toggleFavorite = (programId: string) => {
-    if (favorites.includes(programId)) {
-      storageUtils.removeFromFavorites(programId);
-    } else {
-      storageUtils.addToFavorites(programId);
+  const toggleFavorite = async (programId: string) => {
+    try {
+      if (favorites.includes(programId)) {
+        await storageService.removeFromFavorites(programId);
+        setFavorites(prev => prev.filter(id => id !== programId));
+      } else {
+        await storageService.addToFavorites(programId);
+        setFavorites(prev => [...prev, programId]);
+      }
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
     }
-    // Force re-render by updating search query
-    setSearchQuery(prev => prev);
   };
 
   const getCategoryName = (categoryId: string) => {
