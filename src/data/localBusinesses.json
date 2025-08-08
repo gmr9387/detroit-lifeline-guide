@@ -1,0 +1,729 @@
+{
+  "farmersMarkets": [
+    {
+      "id": "eastern-market",
+      "name": "Eastern Market",
+      "description": "Detroit's largest and most historic public market",
+      "location": {
+        "address": "2934 Russell St, Detroit, MI 48207",
+        "coordinates": {
+          "lat": 42.3484,
+          "lng": -83.0397
+        }
+      },
+      "hours": {
+        "saturday": "6:00 AM - 4:00 PM",
+        "sunday": "10:00 AM - 4:00 PM",
+        "tuesday": "9:00 AM - 3:00 PM"
+      },
+      "season": "Year-round",
+      "vendors": 225,
+      "categories": ["produce", "meat", "dairy", "baked-goods", "crafts"],
+      "features": [
+        "Free parking",
+        "Food trucks",
+        "Live music",
+        "Cooking demonstrations",
+        "Kids activities"
+      ],
+      "contact": {
+        "phone": "(313) 833-9300",
+        "website": "https://easternmarket.org",
+        "email": "info@easternmarket.org"
+      },
+      "vendorInfo": {
+        "applicationUrl": "https://easternmarket.org/vendors/apply",
+        "fees": {
+          "daily": 25,
+          "seasonal": 500
+        },
+        "requirements": [
+          "Business license",
+          "Food safety certification (for food vendors)",
+          "Insurance",
+          "Product liability coverage"
+        ]
+      }
+    },
+    {
+      "id": "downtown-farmers-market",
+      "name": "Downtown Detroit Farmers Market",
+      "description": "Fresh produce and local goods in the heart of downtown",
+      "location": {
+        "address": "Cadillac Square, Detroit, MI 48226",
+        "coordinates": {
+          "lat": 42.3314,
+          "lng": -83.0458
+        }
+      },
+      "hours": {
+        "wednesday": "11:00 AM - 3:00 PM",
+        "friday": "11:00 AM - 3:00 PM"
+      },
+      "season": "May - October",
+      "vendors": 45,
+      "categories": ["produce", "baked-goods", "honey", "flowers"],
+      "features": [
+        "Downtown location",
+        "Public transportation access",
+        "Office worker lunch crowd",
+        "Live entertainment"
+      ],
+      "contact": {
+        "phone": "(313) 224-3450",
+        "website": "https://detroitmi.gov/departments/neighborhoods",
+        "email": "farmersmarket@detroitmi.gov"
+      },
+      "vendorInfo": {
+        "applicationUrl": "https://detroitmi.gov/departments/neighborhoods/farmers-markets",
+        "fees": {
+          "daily": 15,
+          "seasonal": 300
+        },
+        "requirements": [
+          "Business license",
+          "Food safety certification",
+          "Insurance"
+        ]
+      }
+    },
+    {
+      "id": "corktown-farmers-market",
+      "name": "Corktown Farmers Market",
+      "description": "Community-focused market in historic Corktown",
+      "location": {
+        "address": "1401 Michigan Ave, Detroit, MI 48216",
+        "coordinates": {
+          "lat": 42.3276,
+          "lng": -83.0754
+        }
+      },
+      "hours": {
+        "saturday": "9:00 AM - 2:00 PM"
+      },
+      "season": "June - October",
+      "vendors": 35,
+      "categories": ["produce", "artisan-goods", "coffee", "crafts"],
+      "features": [
+        "Historic neighborhood",
+        "Family-friendly",
+        "Local artisans",
+        "Community events"
+      ],
+      "contact": {
+        "phone": "(313) 962-7747",
+        "website": "https://corktownfarmersmarket.com",
+        "email": "info@corktownfarmersmarket.com"
+      },
+      "vendorInfo": {
+        "applicationUrl": "https://corktownfarmersmarket.com/vendors",
+        "fees": {
+          "daily": 20,
+          "seasonal": 400
+        },
+        "requirements": [
+          "Business license",
+          "Local sourcing preferred",
+          "Insurance"
+        ]
+      }
+    },
+    {
+      "id": "midtown-farmers-market",
+      "name": "Midtown Farmers Market",
+      "description": "Urban market serving the Midtown community",
+      "location": {
+        "address": "Canfield St & 2nd Ave, Detroit, MI 48201",
+        "coordinates": {
+          "lat": 42.3489,
+          "lng": -83.0647
+        }
+      },
+      "hours": {
+        "tuesday": "4:00 PM - 8:00 PM"
+      },
+      "season": "June - October",
+      "vendors": 25,
+      "categories": ["produce", "prepared-foods", "crafts"],
+      "features": [
+        "Evening market",
+        "Student-friendly",
+        "Food trucks",
+        "Live music"
+      ],
+      "contact": {
+        "phone": "(313) 420-6000",
+        "website": "https://midtowndetroit.org",
+        "email": "info@midtowndetroit.org"
+      },
+      "vendorInfo": {
+        "applicationUrl": "https://midtowndetroit.org/farmers-market",
+        "fees": {
+          "daily": 15,
+          "seasonal": 250
+        },
+        "requirements": [
+          "Business license",
+          "Food safety certification",
+          "Insurance"
+        ]
+      }
+    }
+  ],
+  "localBusinesses": [
+    {
+      "id": "detroit-bike-shop",
+      "name": "Detroit Bike Shop",
+      "category": "automotive",
+      "description": "Full-service bicycle shop and repair center",
+      "location": {
+        "address": "1234 Michigan Ave, Detroit, MI 48216",
+        "coordinates": {
+          "lat": 42.3276,
+          "lng": -83.0754
+        }
+      },
+      "hours": {
+        "monday": "9:00 AM - 6:00 PM",
+        "tuesday": "9:00 AM - 6:00 PM",
+        "wednesday": "9:00 AM - 6:00 PM",
+        "thursday": "9:00 AM - 6:00 PM",
+        "friday": "9:00 AM - 6:00 PM",
+        "saturday": "10:00 AM - 4:00 PM",
+        "sunday": "Closed"
+      },
+      "services": [
+        "Bike sales",
+        "Repair services",
+        "Rental bikes",
+        "Group rides",
+        "Maintenance classes"
+      ],
+      "contact": {
+        "phone": "(313) 555-0123",
+        "website": "https://detroitbikeshop.com",
+        "email": "info@detroitbikeshop.com"
+      },
+      "owner": {
+        "name": "Maria Rodriguez",
+        "story": "Started as a hobby fixing bikes for neighbors, now serving the entire Detroit community",
+        "yearsInBusiness": 8
+      },
+      "highlights": [
+        "Women-owned business",
+        "Community bike rides",
+        "Youth programs",
+        "Eco-friendly transportation"
+      ]
+    },
+    {
+      "id": "soul-food-kitchen",
+      "name": "Soul Food Kitchen",
+      "category": "food-service",
+      "description": "Authentic soul food restaurant with family recipes",
+      "location": {
+        "address": "5678 Grand River Ave, Detroit, MI 48208",
+        "coordinates": {
+          "lat": 42.3314,
+          "lng": -83.0458
+        }
+      },
+      "hours": {
+        "monday": "11:00 AM - 9:00 PM",
+        "tuesday": "11:00 AM - 9:00 PM",
+        "wednesday": "11:00 AM - 9:00 PM",
+        "thursday": "11:00 AM - 9:00 PM",
+        "friday": "11:00 AM - 10:00 PM",
+        "saturday": "12:00 PM - 10:00 PM",
+        "sunday": "12:00 PM - 8:00 PM"
+      },
+      "services": [
+        "Dine-in",
+        "Takeout",
+        "Catering",
+        "Sunday brunch",
+        "Cooking classes"
+      ],
+      "contact": {
+        "phone": "(313) 555-0456",
+        "website": "https://soulfoodkitchen.com",
+        "email": "info@soulfoodkitchen.com"
+      },
+      "owner": {
+        "name": "James Johnson",
+        "story": "Carrying on my grandmother's legacy with traditional soul food recipes",
+        "yearsInBusiness": 15
+      },
+      "highlights": [
+        "Family recipes",
+        "Community events",
+        "Local sourcing",
+        "Cultural preservation"
+      ]
+    },
+    {
+      "id": "detroit-art-gallery",
+      "name": "Detroit Art Gallery",
+      "category": "entertainment",
+      "description": "Contemporary art gallery featuring local Detroit artists",
+      "location": {
+        "address": "9012 Woodward Ave, Detroit, MI 48202",
+        "coordinates": {
+          "lat": 42.3484,
+          "lng": -83.0397
+        }
+      },
+      "hours": {
+        "monday": "Closed",
+        "tuesday": "11:00 AM - 6:00 PM",
+        "wednesday": "11:00 AM - 6:00 PM",
+        "thursday": "11:00 AM - 6:00 PM",
+        "friday": "11:00 AM - 8:00 PM",
+        "saturday": "12:00 PM - 6:00 PM",
+        "sunday": "12:00 PM - 5:00 PM"
+      },
+      "services": [
+        "Art exhibitions",
+        "Artist workshops",
+        "Art sales",
+        "Gallery tours",
+        "Art classes"
+      ],
+      "contact": {
+        "phone": "(313) 555-0789",
+        "website": "https://detroitartgallery.com",
+        "email": "info@detroitartgallery.com"
+      },
+      "owner": {
+        "name": "Sarah Williams",
+        "story": "Dedicated to showcasing Detroit's vibrant art scene and supporting local artists",
+        "yearsInBusiness": 12
+      },
+      "highlights": [
+        "Local artists only",
+        "Monthly exhibitions",
+        "Art education programs",
+        "Community partnerships"
+      ]
+    },
+    {
+      "id": "detroit-tech-solutions",
+      "name": "Detroit Tech Solutions",
+      "category": "technology",
+      "description": "IT consulting and digital services for small businesses",
+      "location": {
+        "address": "3456 Cass Ave, Detroit, MI 48201",
+        "coordinates": {
+          "lat": 42.3489,
+          "lng": -83.0647
+        }
+      },
+      "hours": {
+        "monday": "9:00 AM - 6:00 PM",
+        "tuesday": "9:00 AM - 6:00 PM",
+        "wednesday": "9:00 AM - 6:00 PM",
+        "thursday": "9:00 AM - 6:00 PM",
+        "friday": "9:00 AM - 6:00 PM",
+        "saturday": "10:00 AM - 2:00 PM",
+        "sunday": "Closed"
+      },
+      "services": [
+        "Website development",
+        "IT consulting",
+        "Digital marketing",
+        "Tech support",
+        "Training programs"
+      ],
+      "contact": {
+        "phone": "(313) 555-0321",
+        "website": "https://detroittechsolutions.com",
+        "email": "info@detroittechsolutions.com"
+      },
+      "owner": {
+        "name": "Michael Chen",
+        "story": "Helping Detroit businesses thrive in the digital age with accessible technology solutions",
+        "yearsInBusiness": 6
+      },
+      "highlights": [
+        "Minority-owned business",
+        "Local business focus",
+        "Affordable rates",
+        "Community tech education"
+      ]
+    },
+    {
+      "id": "detroit-green-cleaning",
+      "name": "Detroit Green Cleaning",
+      "category": "environmental",
+      "description": "Eco-friendly cleaning services for homes and businesses",
+      "location": {
+        "address": "7890 Jefferson Ave, Detroit, MI 48207",
+        "coordinates": {
+          "lat": 42.3276,
+          "lng": -83.0754
+        }
+      },
+      "hours": {
+        "monday": "8:00 AM - 6:00 PM",
+        "tuesday": "8:00 AM - 6:00 PM",
+        "wednesday": "8:00 AM - 6:00 PM",
+        "thursday": "8:00 AM - 6:00 PM",
+        "friday": "8:00 AM - 6:00 PM",
+        "saturday": "9:00 AM - 4:00 PM",
+        "sunday": "Closed"
+      },
+      "services": [
+        "Residential cleaning",
+        "Commercial cleaning",
+        "Green products",
+        "Eco-friendly supplies",
+        "Cleaning workshops"
+      ],
+      "contact": {
+        "phone": "(313) 555-0654",
+        "website": "https://detroitgreencleaning.com",
+        "email": "info@detroitgreencleaning.com"
+      },
+      "owner": {
+        "name": "Lisa Thompson",
+        "story": "Committed to providing safe, effective cleaning while protecting our environment",
+        "yearsInBusiness": 4
+      },
+      "highlights": [
+        "Eco-friendly products",
+        "Local employment",
+        "Community partnerships",
+        "Environmental education"
+      ]
+    },
+    {
+      "id": "detroit-barber-collective",
+      "name": "Detroit Barber Collective",
+      "category": "beauty",
+      "description": "Modern barbershop with traditional techniques",
+      "location": {
+        "address": "2345 Gratiot Ave, Detroit, MI 48207",
+        "coordinates": {
+          "lat": 42.3484,
+          "lng": -83.0397
+        }
+      },
+      "hours": {
+        "monday": "Closed",
+        "tuesday": "10:00 AM - 7:00 PM",
+        "wednesday": "10:00 AM - 7:00 PM",
+        "thursday": "10:00 AM - 7:00 PM",
+        "friday": "10:00 AM - 8:00 PM",
+        "saturday": "9:00 AM - 6:00 PM",
+        "sunday": "Closed"
+      },
+      "services": [
+        "Haircuts",
+        "Beard trims",
+        "Hair styling",
+        "Grooming products",
+        "Styling consultations"
+      ],
+      "contact": {
+        "phone": "(313) 555-0987",
+        "website": "https://detroitbarbercollective.com",
+        "email": "info@detroitbarbercollective.com"
+      },
+      "owner": {
+        "name": "David Martinez",
+        "story": "Creating a community space where style meets tradition",
+        "yearsInBusiness": 10
+      },
+      "highlights": [
+        "Community hub",
+        "Apprenticeship program",
+        "Local events",
+        "Youth mentoring"
+      ]
+    },
+    {
+      "id": "detroit-community-garden",
+      "name": "Detroit Community Garden Center",
+      "category": "agriculture",
+      "description": "Urban farming and community garden supplies",
+      "location": {
+        "address": "4567 Chene St, Detroit, MI 48211",
+        "coordinates": {
+          "lat": 42.3314,
+          "lng": -83.0458
+        }
+      },
+      "hours": {
+        "monday": "9:00 AM - 6:00 PM",
+        "tuesday": "9:00 AM - 6:00 PM",
+        "wednesday": "9:00 AM - 6:00 PM",
+        "thursday": "9:00 AM - 6:00 PM",
+        "friday": "9:00 AM - 6:00 PM",
+        "saturday": "10:00 AM - 4:00 PM",
+        "sunday": "Closed"
+      },
+      "services": [
+        "Garden supplies",
+        "Plant sales",
+        "Gardening classes",
+        "Community plots",
+        "Urban farming consulting"
+      ],
+      "contact": {
+        "phone": "(313) 555-0432",
+        "website": "https://detroitcommunitygarden.com",
+        "email": "info@detroitcommunitygarden.com"
+      },
+      "owner": {
+        "name": "Robert Green",
+        "story": "Growing food security and community connections through urban agriculture",
+        "yearsInBusiness": 7
+      },
+      "highlights": [
+        "Food security focus",
+        "Community education",
+        "Local food production",
+        "Youth programs"
+      ]
+    },
+    {
+      "id": "detroit-craft-brewery",
+      "name": "Detroit Craft Brewery",
+      "category": "alcohol",
+      "description": "Local craft brewery with taproom and tours",
+      "location": {
+        "address": "6789 Michigan Ave, Detroit, MI 48216",
+        "coordinates": {
+          "lat": 42.3276,
+          "lng": -83.0754
+        }
+      },
+      "hours": {
+        "monday": "Closed",
+        "tuesday": "4:00 PM - 10:00 PM",
+        "wednesday": "4:00 PM - 10:00 PM",
+        "thursday": "4:00 PM - 10:00 PM",
+        "friday": "4:00 PM - 12:00 AM",
+        "saturday": "12:00 PM - 12:00 AM",
+        "sunday": "12:00 PM - 8:00 PM"
+      },
+      "services": [
+        "Craft beer",
+        "Taproom",
+        "Brewery tours",
+        "Beer tastings",
+        "Events space"
+      ],
+      "contact": {
+        "phone": "(313) 555-0765",
+        "website": "https://detroitcraftbrewery.com",
+        "email": "info@detroitcraftbrewery.com"
+      },
+      "owner": {
+        "name": "Jennifer Wilson",
+        "story": "Brewing Detroit pride one craft beer at a time",
+        "yearsInBusiness": 5
+      },
+      "highlights": [
+        "Local ingredients",
+        "Community events",
+        "Brewing classes",
+        "Food truck partnerships"
+      ]
+    }
+  ],
+  "areas": [
+    {
+      "id": "downtown",
+      "name": "Downtown Detroit",
+      "description": "The heart of Detroit with business, entertainment, and cultural attractions",
+      "highlights": [
+        "GM Renaissance Center",
+        "Detroit Riverfront",
+        "Fox Theatre",
+        "Comerica Park",
+        "Ford Field"
+      ],
+      "businessOpportunities": [
+        "Office space",
+        "Retail locations",
+        "Restaurants",
+        "Entertainment venues",
+        "Tourism services"
+      ],
+      "demographics": {
+        "population": "15,000+",
+        "averageIncome": "$65,000",
+        "majorEmployers": ["GM", "Quicken Loans", "Blue Cross Blue Shield"]
+      }
+    },
+    {
+      "id": "midtown",
+      "name": "Midtown Detroit",
+      "description": "Cultural and educational hub with Wayne State University and cultural institutions",
+      "highlights": [
+        "Wayne State University",
+        "Detroit Institute of Arts",
+        "Museum of Contemporary Art",
+        "Detroit Historical Museum",
+        "Cultural Center"
+      ],
+      "businessOpportunities": [
+        "Student services",
+        "Cultural businesses",
+        "Tech startups",
+        "Restaurants",
+        "Retail"
+      ],
+      "demographics": {
+        "population": "12,000+",
+        "averageIncome": "$45,000",
+        "majorEmployers": ["Wayne State University", "DIA", "Tech companies"]
+      }
+    },
+    {
+      "id": "corktown",
+      "name": "Corktown",
+      "description": "Historic neighborhood with Irish roots and growing food scene",
+      "highlights": [
+        "Historic architecture",
+        "Michigan Central Station",
+        "Slows Bar BQ",
+        "Astro Coffee",
+        "Eastern Market proximity"
+      ],
+      "businessOpportunities": [
+        "Restaurants",
+        "Bars",
+        "Retail",
+        "Historic preservation",
+        "Food businesses"
+      ],
+      "demographics": {
+        "population": "8,000+",
+        "averageIncome": "$55,000",
+        "majorEmployers": ["Local businesses", "Restaurants", "Retail"]
+      }
+    },
+    {
+      "id": "eastern-market",
+      "name": "Eastern Market",
+      "description": "Historic market district and food hub of Detroit",
+      "highlights": [
+        "Eastern Market",
+        "Food businesses",
+        "Art studios",
+        "Community gardens",
+        "Food trucks"
+      ],
+      "businessOpportunities": [
+        "Food businesses",
+        "Art studios",
+        "Retail",
+        "Food trucks",
+        "Community services"
+      ],
+      "demographics": {
+        "population": "5,000+",
+        "averageIncome": "$40,000",
+        "majorEmployers": ["Market vendors", "Food businesses", "Artists"]
+      }
+    },
+    {
+      "id": "cass-corridor",
+      "name": "Cass Corridor",
+      "description": "Up-and-coming area with arts, culture, and innovation",
+      "highlights": [
+        "Art galleries",
+        "Music venues",
+        "Tech companies",
+        "Creative spaces",
+        "Community organizations"
+      ],
+      "businessOpportunities": [
+        "Art galleries",
+        "Music venues",
+        "Tech startups",
+        "Creative services",
+        "Community organizations"
+      ],
+      "demographics": {
+        "population": "6,000+",
+        "averageIncome": "$35,000",
+        "majorEmployers": ["Artists", "Tech companies", "Nonprofits"]
+      }
+    },
+    {
+      "id": "north-end",
+      "name": "North End",
+      "description": "Residential neighborhood with strong community ties",
+      "highlights": [
+        "Community gardens",
+        "Local businesses",
+        "Historic homes",
+        "Community organizations",
+        "Parks"
+      ],
+      "businessOpportunities": [
+        "Community services",
+        "Retail",
+        "Food businesses",
+        "Childcare",
+        "Home services"
+      ],
+      "demographics": {
+        "population": "10,000+",
+        "averageIncome": "$30,000",
+        "majorEmployers": ["Local businesses", "Community organizations", "Schools"]
+      }
+    },
+    {
+      "id": "southwest",
+      "name": "Southwest Detroit",
+      "description": "Diverse neighborhood with strong Latino culture and business community",
+      "highlights": [
+        "Mexicantown",
+        "Vernor Highway",
+        "Clark Park",
+        "Cultural diversity",
+        "Local businesses"
+      ],
+      "businessOpportunities": [
+        "Restaurants",
+        "Retail",
+        "Cultural businesses",
+        "Services",
+        "Food businesses"
+      ],
+      "demographics": {
+        "population": "25,000+",
+        "averageIncome": "$35,000",
+        "majorEmployers": ["Local businesses", "Restaurants", "Retail"]
+      }
+    },
+    {
+      "id": "hamtramck",
+      "name": "Hamtramck",
+      "description": "Independent city within Detroit with diverse immigrant communities",
+      "highlights": [
+        "Polish and Yemeni communities",
+        "Local restaurants",
+        "Cultural diversity",
+        "Small businesses",
+        "Community events"
+      ],
+      "businessOpportunities": [
+        "Restaurants",
+        "Retail",
+        "Cultural businesses",
+        "Services",
+        "Food businesses"
+      ],
+      "demographics": {
+        "population": "22,000+",
+        "averageIncome": "$30,000",
+        "majorEmployers": ["Local businesses", "Restaurants", "Manufacturing"]
+      }
+    }
+  ]
+}

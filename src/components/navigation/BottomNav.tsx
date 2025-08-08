@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { icon: Home, label: 'Home', path: '/' },
-  { icon: Search, label: 'Search', path: '/search' },
-  { icon: Plus, label: 'Apply', path: '/programs' },
-  { icon: Heart, label: 'Saved', path: '/favorites' },
+  { icon: Home, label: 'Home', path: '/dashboard' },
+  { icon: Search, label: 'Programs', path: '/programs' },
+  { icon: Plus, label: 'Business', path: '/business-licenses' },
+  { icon: Users, label: 'Community', path: '/community' },
   { icon: User, label: 'Profile', path: '/profile' },
 ];
 
