@@ -80,7 +80,7 @@
         "hours": "Mon-Fri 8:00 AM - 5:00 PM"
       },
       "languages": ["English", "Spanish", "Arabic"],
-      "applicationUrl": "https://www.michiganworks.org/locations"
+      "applicationUrl": "https://www.michiganworks.org/"
     },
     {
       "id": "techtown-detroit",
@@ -111,7 +111,7 @@
         "hours": "Mon-Fri 9:00 AM - 5:00 PM"
       },
       "languages": ["English"],
-      "applicationUrl": "https://techtowndetroit.org/programs/"
+      "applicationUrl": "https://techtowndetroit.org/"
     },
     {
       "id": "motor-city-match",
@@ -138,44 +138,43 @@
       ],
       "contact": {
         "phone": "(313) 224-6732",
-        "website": "https://motorcitymatch.com",
+        "website": "https://www.motorcitymatch.com",
         "address": "2 Woodward Ave, Detroit, MI 48226",
         "hours": "Mon-Fri 8:00 AM - 5:00 PM"
       },
       "languages": ["English", "Spanish"],
-      "applicationUrl": "https://motorcitymatch.com/apply/"
+      "applicationUrl": "https://www.motorcitymatch.com/"
     },
     {
       "id": "4c-childcare",
-      "name": "Child Care Coordinating Council (4C)",
+      "name": "Great Start to Quality (Child Care Resource)",
       "category": "childcare",
-      "description": "Child care assistance and quality early childhood programs",
+      "description": "Find and compare quality child care programs across Michigan",
       "eligibility": {
-        "income": "Up to 200% Federal Poverty Level",
+        "income": "Any",
         "age": "Children 0-13",
-        "residency": "Wayne County",
+        "residency": "Michigan resident",
         "employment": "Working or in school/training"
       },
       "benefits": [
-        "Child care subsidies",
-        "Quality child care referrals",
-        "Parent education",
+        "Child care program search",
+        "Quality ratings",
+        "Parent resources",
         "Support services"
       ],
       "documents": [
-        "Proof of income",
-        "Child's birth certificate",
-        "Immunization records",
-        "Work/school schedule"
+        "Proof of residency (for subsidies)",
+        "Proof of income (for subsidies)",
+        "Work/school schedule (for subsidies)"
       ],
       "contact": {
-        "phone": "(248) 477-1550",
-        "website": "https://www.4c.wayne.edu",
-        "address": "290 Hood Ave, Detroit, MI 48201",
-        "hours": "Mon-Fri 8:00 AM - 4:30 PM"
+        "phone": "(877) 614-7328",
+        "website": "https://greatstarttoquality.org",
+        "address": "Statewide resource",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
       },
       "languages": ["English", "Spanish", "Arabic"],
-      "applicationUrl": "https://www.4c.wayne.edu/child-care-assistance"
+      "applicationUrl": "https://greatstarttoquality.org/find-programs/"
     },
     {
       "id": "wic-program",
@@ -202,12 +201,12 @@
       ],
       "contact": {
         "phone": "(313) 876-4000",
-        "website": "https://www.michigan.gov/wic",
+        "website": "https://www.michigan.gov/mdhhs/assistance-programs/wic",
         "address": "Multiple locations in Detroit",
         "hours": "Varies by location"
       },
       "languages": ["English", "Spanish", "Arabic"],
-      "applicationUrl": "https://www.michigan.gov/wic/find-wic-clinic"
+      "applicationUrl": "https://www.michigan.gov/mdhhs/assistance-programs/wic/localagencies"
     },
     {
       "id": "dhc-housing",
@@ -242,36 +241,36 @@
       "applicationUrl": "https://www.dhcmi.org/housing-programs"
     },
     {
-      "id": "erap-assistance",
-      "name": "Emergency Rental Assistance Program (ERAP)",
+      "id": "rental-assistance-detroit",
+      "name": "Rental Assistance Resources (Detroit HRD)",
       "category": "housing",
-      "description": "Emergency rental and utility assistance for eligible households",
+      "description": "City of Detroit Housing & Revitalization Department resources for rental help and housing services",
       "eligibility": {
-        "income": "Up to 80% Area Median Income",
+        "income": "Varies by program",
         "age": "Any",
         "residency": "Detroit city limits",
-        "hardship": "COVID-19 related financial hardship"
+        "hardship": "Varies by program"
       },
       "benefits": [
-        "Up to 18 months rent assistance",
-        "Utility assistance",
-        "Late fees and court costs",
-        "Moving expenses"
+        "Rental assistance resources",
+        "Utility assistance referrals",
+        "Housing counseling",
+        "Supportive services"
       ],
       "documents": [
-        "Lease agreement",
+        "Lease agreement (if applicable)",
         "Photo ID",
-        "Proof of income loss",
-        "Utility bills"
+        "Proof of income",
+        "Utility bills (if applicable)"
       ],
       "contact": {
-        "phone": "(313) 230-0022",
-        "website": "https://detroitmi.gov/departments/housing-and-revitalization-department/programs-and-services/emergency-rental-assistance-program-erap",
+        "phone": "(313) 224-9515",
+        "website": "https://detroitmi.gov/departments/housing-and-revitalization-department",
         "address": "2 Woodward Ave, Detroit, MI 48226",
         "hours": "Mon-Fri 8:00 AM - 5:00 PM"
       },
       "languages": ["English", "Spanish", "Arabic"],
-      "applicationUrl": "https://erap.detroitmi.gov/"
+      "applicationUrl": "https://detroithomeconnect.detroitmi.gov/"
     },
     {
       "id": "medicaid-enrollment",
@@ -362,12 +361,210 @@
       ],
       "contact": {
         "phone": "1-800-477-4747",
-        "website": "https://www.dteenergy.com/us/en/residential/service-request/assistance-programs",
+        "website": "https://www.dteenergy.com/us/en/residential/billing-and-payments/energy-assistance/low-income-programs.html",
         "address": "Multiple service centers",
         "hours": "Mon-Fri 7:00 AM - 7:00 PM"
       },
       "languages": ["English", "Spanish"],
-      "applicationUrl": "https://www.dteenergy.com/residential/assistance-programs"
+      "applicationUrl": "https://www.dteenergy.com/us/en/residential/billing-and-payments/energy-assistance"
+    },
+
+    {
+      "id": "mi-211",
+      "name": "Michigan 2-1-1",
+      "category": "financial",
+      "description": "Free, confidential service connecting residents to local resources for housing, utilities, food, childcare, and more",
+      "eligibility": {
+        "income": "Any",
+        "age": "Any",
+        "residency": "Michigan resident"
+      },
+      "benefits": [
+        "Resource navigation",
+        "Referrals to local agencies",
+        "24/7 support"
+      ],
+      "documents": [
+        "None required"
+      ],
+      "contact": {
+        "phone": "211",
+        "website": "https://mi211.org",
+        "address": "Statewide resource",
+        "hours": "24/7"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://mi211.org/"
+    },
+    {
+      "id": "wayne-metro",
+      "name": "Wayne Metro Community Action Agency",
+      "category": "financial",
+      "description": "Financial assistance, utility help, housing services, and family supports for Wayne County residents",
+      "eligibility": {
+        "income": "Varies by program",
+        "age": "Any",
+        "residency": "Wayne County"
+      },
+      "benefits": [
+        "Energy assistance",
+        "Water bill assistance",
+        "Housing & rental assistance",
+        "Financial coaching"
+      ],
+      "documents": [
+        "Photo ID",
+        "Proof of residency",
+        "Proof of income"
+      ],
+      "contact": {
+        "phone": "(313) 388-9799",
+        "website": "https://www.waynemetro.org",
+        "address": "7310 Woodward Ave, Detroit, MI 48202",
+        "hours": "Mon-Fri 8:30 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://www.waynemetro.org/"
+    },
+    {
+      "id": "gleaners-food",
+      "name": "Gleaners Community Food Bank",
+      "category": "food",
+      "description": "Food distribution and pantry network across Southeast Michigan",
+      "eligibility": {
+        "income": "Varies by site",
+        "age": "Any",
+        "residency": "Southeast Michigan"
+      },
+      "benefits": [
+        "Food pantries",
+        "Mobile distributions",
+        "Community resources"
+      ],
+      "documents": [
+        "Photo ID (may be requested)",
+        "Proof of residency (may be requested)"
+      ],
+      "contact": {
+        "phone": "(866) 453-2637",
+        "website": "https://www.gcfb.org",
+        "address": "2131 Beaufait St, Detroit, MI 48207",
+        "hours": "Varies by location"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://www.gcfb.org/"
+    },
+    {
+      "id": "forgotten-harvest",
+      "name": "Forgotten Harvest",
+      "category": "food",
+      "description": "Food rescue and distribution network with a pantry locator",
+      "eligibility": {
+        "income": "Varies by site",
+        "age": "Any",
+        "residency": "Southeast Michigan"
+      },
+      "benefits": [
+        "Food pantry locator",
+        "Mobile distributions",
+        "Community resources"
+      ],
+      "documents": [
+        "Photo ID (may be requested)",
+        "Proof of residency (may be requested)"
+      ],
+      "contact": {
+        "phone": "(248) 967-1500",
+        "website": "https://www.forgottenharvest.org",
+        "address": "15000 W 8 Mile Rd, Oak Park, MI 48237",
+        "hours": "Varies by location"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://www.forgottenharvest.org/find-food/"
+    },
+    {
+      "id": "thaw-fund",
+      "name": "THAW - The Heat And Warmth Fund",
+      "category": "utilities",
+      "description": "Energy assistance for low-income households in Michigan",
+      "eligibility": {
+        "income": "Varies by program",
+        "age": "Any",
+        "residency": "Michigan resident"
+      },
+      "benefits": [
+        "Utility bill payment assistance",
+        "Shutoff prevention",
+        "Energy resources"
+      ],
+      "documents": [
+        "Photo ID",
+        "Proof of income",
+        "Recent utility bill"
+      ],
+      "contact": {
+        "phone": "(800) 866-8429",
+        "website": "https://thawfund.org",
+        "address": "535 Griswold St, Detroit, MI 48226",
+        "hours": "Mon-Fri 8:00 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://thawfund.org/"
+    },
+    {
+      "id": "united-way-sem",
+      "name": "United Way for Southeastern Michigan",
+      "category": "financial",
+      "description": "Community resources for food, utilities, financial assistance, child care, and more",
+      "eligibility": {
+        "income": "Any",
+        "age": "Any",
+        "residency": "Southeast Michigan"
+      },
+      "benefits": [
+        "Resource navigation",
+        "Financial assistance referrals",
+        "Family supports"
+      ],
+      "documents": [
+        "None required"
+      ],
+      "contact": {
+        "phone": "(313) 226-9200",
+        "website": "https://unitedwaysem.org/get-help/",
+        "address": "707 W Milwaukee Ave, Detroit, MI 48202",
+        "hours": "Mon-Fri 8:30 AM - 5:00 PM"
+      },
+      "languages": ["English", "Spanish"],
+      "applicationUrl": "https://unitedwaysem.org/get-help/"
+    },
+    {
+      "id": "detroit-means-business",
+      "name": "Detroit Means Business",
+      "category": "business",
+      "description": "Support, training, and resources for Detroit small businesses",
+      "eligibility": {
+        "income": "Any",
+        "age": "18+",
+        "residency": "Detroit area"
+      },
+      "benefits": [
+        "Business coaching",
+        "Access to capital",
+        "Workshops and training"
+      ],
+      "documents": [
+        "Business plan (if available)",
+        "Photo ID"
+      ],
+      "contact": {
+        "phone": "(313) 962-4590",
+        "website": "https://www.detroitmeansbusiness.org",
+        "address": "One Campus Martius, Detroit, MI 48226",
+        "hours": "Mon-Fri 9:00 AM - 5:00 PM"
+      },
+      "languages": ["English"],
+      "applicationUrl": "https://www.detroitmeansbusiness.org/"
     }
   ]
 }
