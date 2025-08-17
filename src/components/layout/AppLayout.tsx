@@ -9,9 +9,10 @@ interface AppLayoutProps {
 
 export function AppLayout({ children, hideBottomNav = false }: AppLayoutProps) {
 	const { i18n } = useTranslation();
+	const isRtl = i18n.language === 'ar';
 
 	return (
-		<div className="min-h-screen bg-gradient-subtle">
+		<div className="min-h-screen bg-gradient-subtle" dir={isRtl ? 'rtl' : 'ltr'}>
 			<header className="w-full py-3 px-4 flex justify-end max-w-md mx-auto">
 				<select
 					aria-label="Language"
@@ -26,7 +27,8 @@ export function AppLayout({ children, hideBottomNav = false }: AppLayoutProps) {
 			</header>
 			<main className={cn(
 				"min-h-screen",
-				!hideBottomNav && "pb-20"
+				!hideBottomNav && "pb-20",
+				isRtl && "text-right"
 			)}>
 				{children}
 			</main>
