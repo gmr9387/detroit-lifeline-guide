@@ -1,18 +1,20 @@
 import { Home, Search, User, Heart, Plus } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-
-const navItems = [
-  { icon: Home, label: 'Home', path: '/' },
-  { icon: Search, label: 'Search', path: '/search' },
-  { icon: Plus, label: 'Apply', path: '/programs' },
-  { icon: Heart, label: 'Saved', path: '/favorites' },
-  { icon: User, label: 'Profile', path: '/profile' },
-];
+import { useTranslation } from 'react-i18next';
 
 export function BottomNav() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const navItems = [
+    { icon: Home, label: t('nav.home'), path: '/' },
+    { icon: Search, label: t('nav.search'), path: '/search' },
+    { icon: Plus, label: t('nav.apply'), path: '/programs' },
+    { icon: Heart, label: t('nav.saved'), path: '/favorites' },
+    { icon: User, label: t('nav.profile'), path: '/profile' },
+  ];
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-50">
