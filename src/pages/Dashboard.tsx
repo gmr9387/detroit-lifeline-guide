@@ -16,15 +16,18 @@ import {
   ExternalLink,
   Calendar,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Share2
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { useTranslation } from 'react-i18next';
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [recommendations, setRecommendations] = useState<Program[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const userProfile = storageUtils.getUserProfile();
@@ -36,7 +39,6 @@ export default function Dashboard() {
     setProfile(userProfile);
     setApplications(storageUtils.getApplications());
     
-    // Generate personalized recommendations
     const allPrograms = detroitResources.programs as Program[];
     const personalizedPrograms = allPrograms.filter(program => 
       userProfile.primaryNeeds.includes(program.category)
@@ -54,11 +56,11 @@ export default function Dashboard() {
 
   const getStatusBadge = (status: Application['status']) => {
     const variants = {
-      saved: { variant: 'secondary' as const, text: 'Saved' },
-      started: { variant: 'warning' as const, text: 'In Progress' },
-      submitted: { variant: 'default' as const, text: 'Submitted' },
-      approved: { variant: 'success' as const, text: 'Approved' },
-      denied: { variant: 'destructive' as const, text: 'Denied' },
+      saved: { variant: 'secondary' as const, text: t('dashboard.statuses.saved') },
+      started: { variant: 'warning' as const, text: t('dashboard.statuses.started') },
+      submitted: { variant: 'default' as const, text: t('dashboard.statuses.submitted') },
+      approved: { variant: 'success' as const, text: t('dashboard.statuses.approved') },
+      denied: { variant: 'destructive' as const, text: t('dashboard.statuses.denied') },
     };
     
     const config = variants[status];
@@ -96,6 +98,13 @@ export default function Dashboard() {
     },
   ];
 
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.origin);
+      alert(t('dashboard.copied'));
+    } catch {}
+  };
+
   if (!profile) {
     return <div>Loading...</div>;
   }
@@ -117,11 +126,26 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Share Banner */}
+        <Card>
+          <CardContent className="p-4 flex items-center gap-3">
+            <Share2 className="h-5 w-5 text-primary" />
+            <div className="flex-1 text-sm">
+              <div className="font-medium">{t('dashboard.shareTitle')}</div>
+              <div className="text-muted-foreground">{t('dashboard.shareDesc')}</div>
+            </div>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline" onClick={handleCopyLink}>{t('dashboard.copyLink')}</Button>
+              <Button size="sm" onClick={() => navigator.share && navigator.share({ title: 'Detroit Resource Navigator', url: window.location.origin })}>{t('dashboard.shareButton')}</Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Quick Actions */}
         <div>
           <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
             <Clock className="h-5 w-5 text-primary" />
-            Quick Actions
+            {t('dashboard.quickActions')}
           </h2>
           <div className="grid grid-cols-2 gap-3">
             {quickActions.map((action, index) => (
@@ -144,7 +168,7 @@ export default function Dashboard() {
                   <h3 className="font-medium text-sm mb-1">{action.title}</h3>
                   <p className="text-xs text-muted-foreground">{action.description}</p>
                   {action.urgent && (
-                    <Badge variant="secondary" className="mt-2 text-xs">Urgent</Badge>
+                    <Badge variant="secondary" className="mt-2 text-xs">{t('dashboard.urgent')}</Badge>
                   )}
                 </CardContent>
               </Card>
@@ -158,10 +182,10 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-lg font-semibold flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-primary" />
-                My Applications
+                {t('dashboard.myApplications')}
               </h2>
               <Link to="/applications">
-                <Button variant="ghost" size="sm">View All</Button>
+                <Button variant="ghost" size="sm">{t('dashboard.viewAll')}</Button>
               </Link>
             </div>
             <div className="space-y-3">
@@ -171,7 +195,7 @@ export default function Dashboard() {
                     <div>
                       <h3 className="font-medium">{app.programName}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Applied {new Date(app.appliedAt).toLocaleDateString()}
+                        {t('dashboard.appliedOn')} {new Date(app.appliedAt).toLocaleDateString()}
                       </p>
                     </div>
                     {getStatusBadge(app.status)}
@@ -187,10 +211,10 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold flex items-center gap-2">
               <Star className="h-5 w-5 text-primary" />
-              Recommended for You
+              {t('dashboard.recommended')}
             </h2>
             <Link to="/programs">
-              <Button variant="ghost" size="sm">See All Programs</Button>
+              <Button variant="ghost" size="sm">{t('dashboard.viewAll')}</Button>
             </Link>
           </div>
           <div className="space-y-4">
@@ -227,7 +251,7 @@ export default function Dashboard() {
                       className="flex-1"
                       onClick={() => navigate(`/program/${program.id}`)}
                     >
-                      Learn More
+                      {t('dashboard.learnMore')}
                       <ArrowRight className="h-4 w-4 ml-1" />
                     </Button>
                     <Button 
@@ -249,7 +273,7 @@ export default function Dashboard() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2">
               <AlertCircle className="h-5 w-5 text-warning" />
-              Important Reminders
+              {t('dashboard.important')}
             </CardTitle>
           </CardHeader>
           <CardContent>

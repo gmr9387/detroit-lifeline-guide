@@ -19,6 +19,7 @@ import {
   Heart
 } from 'lucide-react';
 import { storageUtils } from '@/utils/localStorage';
+import { useTranslation } from 'react-i18next';
 
 export default function Programs() {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,7 @@ export default function Programs() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [showFilters, setShowFilters] = useState(false);
+  const { t } = useTranslation();
 
   const favorites = storageUtils.getFavorites();
   const categories = detroitResources.categories as ResourceCategory[];
@@ -35,12 +37,10 @@ export default function Programs() {
   const filteredPrograms = useMemo(() => {
     let filtered = programs;
 
-    // Filter by category
     if (selectedCategory) {
       filtered = filtered.filter(program => program.category === selectedCategory);
     }
 
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(program =>
@@ -59,7 +59,6 @@ export default function Programs() {
     } else {
       storageUtils.addToFavorites(programId);
     }
-    // Force re-render by updating search query
     setSearchQuery(prev => prev);
   };
 
@@ -72,9 +71,9 @@ export default function Programs() {
       <div className="p-4 space-y-4">
         {/* Header */}
         <div className="bg-primary rounded-xl p-6 text-primary-foreground">
-          <h1 className="text-2xl font-bold mb-2">Browse Programs</h1>
+          <h1 className="text-2xl font-bold mb-2">{t('programs.browse')}</h1>
           <p className="text-primary-foreground/90">
-            {filteredPrograms.length} programs available
+            {filteredPrograms.length} {t('programs.availableLabel')}
           </p>
         </div>
 
@@ -84,7 +83,7 @@ export default function Programs() {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search programs, benefits, or keywords..."
+                placeholder={t('programs.searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -94,10 +93,10 @@ export default function Programs() {
             <div className="flex gap-2 items-center">
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="flex-1">
-                  <SelectValue placeholder="All Categories" />
+                  <SelectValue placeholder={t('programs.allCategories')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
+                  <SelectItem value="">{t('programs.allCategories')}</SelectItem>
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       {category.name}
@@ -117,7 +116,7 @@ export default function Programs() {
 
             {selectedCategory && (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Filtered by:</span>
+                <span className="text-sm text-muted-foreground">{t('programs.filteredBy')}</span>
                 <Badge variant="secondary">
                   {getCategoryName(selectedCategory)}
                   <button
@@ -155,7 +154,7 @@ export default function Programs() {
             <Card className="text-center p-8">
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  No programs found matching your criteria.
+                  {t('programs.noResults')}
                 </p>
                 <Button
                   variant="outline"
@@ -164,7 +163,7 @@ export default function Programs() {
                     setSelectedCategory('');
                   }}
                 >
-                  Clear Filters
+                  {t('programs.clearFilters')}
                 </Button>
               </CardContent>
             </Card>
@@ -201,7 +200,7 @@ export default function Programs() {
                 <CardContent className="pt-0">
                   {/* Benefits Preview */}
                   <div className="mb-4">
-                    <div className="text-sm font-medium mb-1">Key Benefits:</div>
+                    <div className="text-sm font-medium mb-1">{t('programs.keyBenefits')}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
                       {program.benefits.slice(0, 2).map((benefit, index) => (
                         <li key={index} className="flex items-start gap-1">
@@ -235,7 +234,7 @@ export default function Programs() {
 
                   {/* Language Support */}
                   <div className="flex items-center gap-1 mb-4">
-                    <span className="text-xs text-muted-foreground">Languages:</span>
+                    <span className="text-xs text-muted-foreground">{t('programs.languages')}</span>
                     {program.languages.map((lang, index) => (
                       <Badge key={index} variant="outline" className="text-xs">
                         {lang}
@@ -247,7 +246,7 @@ export default function Programs() {
                   <div className="flex gap-2">
                     <Link to={`/program/${program.id}`} className="flex-1">
                       <Button size="sm" className="w-full">
-                        View Details
+                        {t('programs.viewDetails')}
                         <ArrowRight className="h-4 w-4 ml-1" />
                       </Button>
                     </Link>
