@@ -25,6 +25,7 @@ import {
   Share,
   Bookmark
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function ProgramDetail() {
   const { programId } = useParams<{ programId: string }>();
@@ -32,6 +33,7 @@ export default function ProgramDetail() {
   const [program, setProgram] = useState<Program | null>(null);
   const [checkedDocuments, setCheckedDocuments] = useState<string[]>([]);
   const [isFavorited, setIsFavorited] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!programId) {
@@ -86,8 +88,6 @@ export default function ProgramDetail() {
     };
 
     storageUtils.saveApplication(application);
-    
-    // Show success message and navigate
     navigate('/dashboard');
   };
 
@@ -117,7 +117,7 @@ export default function ProgramDetail() {
             onClick={() => navigate(-1)}
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            Back
+            {t('detail.back')}
           </Button>
           
           <div className="flex gap-2 ml-auto">
@@ -173,7 +173,7 @@ export default function ProgramDetail() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Phone className="h-5 w-5 text-primary" />
-              Contact Information
+              {t('detail.contactInfo')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -182,7 +182,7 @@ export default function ProgramDetail() {
                 <Phone className="h-4 w-4 text-muted-foreground" />
                 <div>
                   <div className="font-medium">{program.contact.phone}</div>
-                  <div className="text-sm text-muted-foreground">Phone</div>
+                  <div className="text-sm text-muted-foreground">{t('detail.phone')}</div>
                 </div>
               </div>
               
@@ -190,7 +190,7 @@ export default function ProgramDetail() {
                 <Clock className="h-4 w-4 text-muted-foreground" />
                 <div>
                   <div className="font-medium">{program.contact.hours}</div>
-                  <div className="text-sm text-muted-foreground">Hours</div>
+                  <div className="text-sm text-muted-foreground">{t('detail.hours')}</div>
                 </div>
               </div>
               
@@ -198,7 +198,7 @@ export default function ProgramDetail() {
                 <MapPin className="h-4 w-4 text-muted-foreground mt-1" />
                 <div>
                   <div className="font-medium">{program.contact.address}</div>
-                  <div className="text-sm text-muted-foreground">Address</div>
+                  <div className="text-sm text-muted-foreground">{t('detail.address')}</div>
                 </div>
               </div>
 
@@ -211,7 +211,7 @@ export default function ProgramDetail() {
                     rel="noopener noreferrer"
                     className="font-medium text-primary hover:underline"
                   >
-                    Visit Website
+                    {t('detail.visitWebsite')}
                   </a>
                   <div className="text-sm text-muted-foreground">Website</div>
                 </div>
@@ -220,7 +220,7 @@ export default function ProgramDetail() {
 
             {/* Language Support */}
             <div>
-              <div className="font-medium mb-2">Languages Available:</div>
+              <div className="font-medium mb-2">{t('detail.languagesAvailable')}</div>
               <div className="flex flex-wrap gap-2">
                 {program.languages.map((lang, index) => (
                   <Badge key={index} variant="outline">
@@ -237,7 +237,7 @@ export default function ProgramDetail() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-primary" />
-              Program Benefits
+              {t('detail.programBenefits')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -257,7 +257,7 @@ export default function ProgramDetail() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users className="h-5 w-5 text-primary" />
-              Eligibility Requirements
+              {t('detail.eligibility')}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -283,10 +283,10 @@ export default function ProgramDetail() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
-              Required Documents
+              {t('detail.requiredDocuments')}
             </CardTitle>
             <CardDescription>
-              Check off documents as you gather them
+              {t('detail.checkOff')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -313,7 +313,7 @@ export default function ProgramDetail() {
             
             <div className="mt-4 p-3 bg-muted rounded-lg">
               <div className="text-sm font-medium mb-1">
-                Documents Ready: {checkedDocuments.length}/{program.documents.length}
+                {t('detail.documentsReady')}: {checkedDocuments.length}/{program.documents.length}
               </div>
               <div className="w-full bg-background rounded-full h-2">
                 <div 
@@ -332,7 +332,7 @@ export default function ProgramDetail() {
             className="w-full"
             onClick={() => window.open(program.applicationUrl, '_blank')}
           >
-            Apply Now
+            {t('detail.applyNow')}
             <ExternalLink className="h-4 w-4 ml-2" />
           </Button>
           
@@ -343,7 +343,7 @@ export default function ProgramDetail() {
             onClick={handleSaveApplication}
           >
             <Bookmark className="h-4 w-4 mr-2" />
-            Save Application Progress
+            {t('detail.saveProgress')}
           </Button>
         </div>
 
@@ -351,8 +351,7 @@ export default function ProgramDetail() {
         <Card className="border-primary bg-primary-light/10">
           <CardContent className="p-4">
             <div className="text-sm">
-              <strong>Important:</strong> This will take you to the official application website. 
-              Make sure you have all required documents ready before starting your application.
+              <strong>{t('detail.important')}:</strong> {t('detail.importantNote')}
             </div>
           </CardContent>
         </Card>

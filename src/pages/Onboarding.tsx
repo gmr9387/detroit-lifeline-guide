@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { storageUtils } from '@/utils/localStorage';
 import { UserProfile } from '@/types';
 import { ArrowRight, ArrowLeft, Users, DollarSign, MapPin, Heart, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const TOTAL_STEPS = 5;
 
@@ -41,6 +42,7 @@ const languages = [
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     householdSize: 1,
@@ -107,10 +109,10 @@ export default function Onboarding() {
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-primary-foreground mb-2">
-            Detroit Resource Navigator
+            {t('onboarding.title')}
           </h1>
           <p className="text-primary-foreground/80">
-            Find the help you need in just 5 minutes
+            {t('onboarding.subtitle')}
           </p>
         </div>
 

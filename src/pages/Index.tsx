@@ -12,9 +12,11 @@ import {
   Heart,
   Star
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Check if user has completed onboarding
@@ -28,12 +30,12 @@ const Index = () => {
     {
       icon: MapPin,
       title: 'Local Resources',
-      description: 'Find Detroit-specific programs and services near you'
+      description: "Find Detroit-specific programs and services near you"
     },
     {
       icon: Users,
       title: 'Personalized',
-      description: 'Get recommendations based on your family\'s needs'
+      description: "Get recommendations based on your family's needs"
     },
     {
       icon: Shield,
@@ -60,13 +62,12 @@ const Index = () => {
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
           <div className="mb-8">
             <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-4">
-              Detroit Resource
+              {t('hero.title1')}
               <br />
-              <span className="text-secondary">Navigator</span>
+              <span className="text-secondary">{t('hero.title2')}</span>
             </h1>
             <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Find government services, social programs, and community resources 
-              all in one place. Get personalized help for your family's needs.
+              {t('hero.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -76,7 +77,7 @@ const Index = () => {
                 onClick={() => navigate('/onboarding')}
                 className="px-8 py-3 text-lg shadow-glow"
               >
-                Get Started - 5 Minutes
+                {t('hero.getStarted')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <p className="text-sm text-primary-foreground/70">
@@ -161,7 +162,7 @@ const Index = () => {
               onClick={() => navigate('/onboarding')}
               className="px-8"
             >
-              Start Your Search
+              {t('hero.cta')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
