@@ -1,10 +1,13 @@
-import { UserProfile, Application } from '@/types';
+import { UserProfile, Application, TodoItem, Notification, ProgressMilestone } from '@/types';
 
 const STORAGE_KEYS = {
   USER_PROFILE: 'detroit_navigator_profile',
   APPLICATIONS: 'detroit_navigator_applications',
   FAVORITES: 'detroit_navigator_favorites',
   SEARCH_HISTORY: 'detroit_navigator_search_history',
+  TODO_ITEMS: 'detroit_navigator_todos',
+  NOTIFICATIONS: 'detroit_navigator_notifications',
+  PROGRESS_MILESTONES: 'detroit_navigator_milestones',
 } as const;
 
 export const storageUtils = {
@@ -80,6 +83,92 @@ export const storageUtils = {
     Object.values(STORAGE_KEYS).forEach(key => {
       localStorage.removeItem(key);
     });
+  },
+
+  // Todo Items
+  saveTodoItem: (todo: TodoItem): void => {
+    const todos = getTodoItems();
+    const existingIndex = todos.findIndex(t => t.id === todo.id);
+    
+    if (existingIndex >= 0) {
+      todos[existingIndex] = todo;
+    } else {
+      todos.push(todo);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.TODO_ITEMS, JSON.stringify(todos));
+  },
+
+  getTodoItems: (): TodoItem[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.TODO_ITEMS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  deleteTodoItem: (todoId: string): void => {
+    const todos = getTodoItems();
+    const filtered = todos.filter(t => t.id !== todoId);
+    localStorage.setItem(STORAGE_KEYS.TODO_ITEMS, JSON.stringify(filtered));
+  },
+
+  toggleTodoComplete: (todoId: string): void => {
+    const todos = getTodoItems();
+    const todo = todos.find(t => t.id === todoId);
+    if (todo) {
+      todo.completed = !todo.completed;
+      localStorage.setItem(STORAGE_KEYS.TODO_ITEMS, JSON.stringify(todos));
+    }
+  },
+
+  // Notifications
+  saveNotification: (notification: Notification): void => {
+    const notifications = getNotifications();
+    notifications.unshift(notification);
+    const limited = notifications.slice(0, 50); // Keep last 50 notifications
+    localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(limited));
+  },
+
+  getNotifications: (): Notification[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  markNotificationAsRead: (notificationId: string): void => {
+    const notifications = getNotifications();
+    const notification = notifications.find(n => n.id === notificationId);
+    if (notification) {
+      notification.read = true;
+      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(notifications));
+    }
+  },
+
+  clearAllNotifications: (): void => {
+    localStorage.removeItem(STORAGE_KEYS.NOTIFICATIONS);
+  },
+
+  // Progress Milestones
+  saveProgressMilestone: (milestone: ProgressMilestone): void => {
+    const milestones = getProgressMilestones();
+    const existingIndex = milestones.findIndex(m => m.id === milestone.id);
+    
+    if (existingIndex >= 0) {
+      milestones[existingIndex] = milestone;
+    } else {
+      milestones.push(milestone);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.PROGRESS_MILESTONES, JSON.stringify(milestones));
+  },
+
+  getProgressMilestones: (): ProgressMilestone[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.PROGRESS_MILESTONES);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  getMilestonesForApplication: (applicationId: string): ProgressMilestone[] => {
+    const milestones = getProgressMilestones();
+    return milestones
+      .filter(m => m.applicationId === applicationId)
+      .sort((a, b) => a.order - b.order);
   }
 };
 
@@ -94,4 +183,16 @@ function getFavorites(): string[] {
 
 function getSearchHistory(): string[] {
   return storageUtils.getSearchHistory();
+}
+
+function getTodoItems(): TodoItem[] {
+  return storageUtils.getTodoItems();
+}
+
+function getNotifications(): Notification[] {
+  return storageUtils.getNotifications();
+}
+
+function getProgressMilestones(): ProgressMilestone[] {
+  return storageUtils.getProgressMilestones();
 }

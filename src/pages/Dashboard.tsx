@@ -16,9 +16,12 @@ import {
   ExternalLink,
   Calendar,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  ListTodo
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { TodoList } from '@/components/TodoList';
+import { NotificationCenter } from '@/components/NotificationCenter';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -242,6 +245,24 @@ export default function Dashboard() {
               </Card>
             ))}
           </div>
+        </div>
+
+        {/* Notifications */}
+        <div>
+          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Bell className="h-5 w-5 text-primary" />
+            Recent Notifications
+          </h2>
+          <NotificationCenter maxNotifications={3} />
+        </div>
+
+        {/* Todo List */}
+        <div>
+          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <ListTodo className="h-5 w-5 text-primary" />
+            My Tasks
+          </h2>
+          <TodoList maxItems={5} />
         </div>
 
         {/* Important Notices */}

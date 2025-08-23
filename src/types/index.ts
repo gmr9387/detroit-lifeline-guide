@@ -57,3 +57,34 @@ export interface QuickAction {
   url: string;
   category: string;
 }
+
+export interface TodoItem {
+  id: string;
+  title: string;
+  description?: string;
+  completed: boolean;
+  category: 'urgent' | 'important' | 'routine';
+  dueDate?: string;
+  createdAt: string;
+  applicationId?: string;
+  programId?: string;
+}
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'warning' | 'success' | 'error';
+  read: boolean;
+  createdAt: string;
+  actionUrl?: string;
+}
+
+export interface ProgressMilestone {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+  applicationId: string;
+  order: number;
+}

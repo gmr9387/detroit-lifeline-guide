@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { ProgressTracker } from '@/components/ProgressTracker';
 import detroitResources from '@/data/detroitResources.json';
 import { Program, Application } from '@/types';
 import { storageUtils } from '@/utils/localStorage';
@@ -324,6 +325,28 @@ export default function ProgramDetail() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Application Progress Tracking */}
+        {(() => {
+          const existingApplication = storageUtils.getApplications().find(app => app.programId === program.id);
+          return existingApplication ? (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-primary" />
+                  Application Progress
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ProgressTracker 
+                  applicationId={existingApplication.id} 
+                  application={existingApplication}
+                  showDetails={true}
+                />
+              </CardContent>
+            </Card>
+          ) : null;
+        })()}
 
         {/* Action Buttons */}
         <div className="space-y-3">
