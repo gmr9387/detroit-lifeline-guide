@@ -9,19 +9,23 @@ import { UserProfile, Program, Application } from '@/types';
 import detroitResources from '@/data/detroitResources.json';
 import ApplicationTracker from '@/components/ApplicationTracker';
 import AIRecommendations from '@/components/AIRecommendations';
-import { 
-  Bell, 
-  Clock, 
-  Star, 
-  ArrowRight, 
-  MapPin, 
+import {
+  Bell,
+  Clock,
+  Star,
+  ArrowRight,
+  MapPin,
   Phone,
   ExternalLink,
   Calendar,
   CheckCircle,
   AlertCircle,
   User,
-  LogOut
+  LogOut,
+  Search,
+  MessageSquare,
+  BarChart3,
+  Shield
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
 
@@ -99,6 +103,20 @@ export default function Dashboard() {
       url: 'https://www.michigan.gov/mibridges',
       urgent: false
     },
+    {
+      title: 'Community',
+      description: 'Connect with others',
+      icon: '👥',
+      url: '/community',
+      urgent: false
+    },
+    {
+      title: 'Analytics',
+      description: 'View your progress',
+      icon: '📊',
+      url: '/analytics',
+      urgent: false
+    },
   ];
 
   const handleLogout = () => {
@@ -147,7 +165,7 @@ export default function Dashboard() {
             <Clock className="h-5 w-5 text-primary" />
             Quick Actions
           </h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {quickActions.map((action, index) => (
               <Card 
                 key={index} 

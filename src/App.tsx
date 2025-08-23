@@ -14,6 +14,9 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Programs from "./pages/Programs";
 import ProgramDetail from "./pages/ProgramDetail";
+import Community from "./pages/Community"; // Phase 4
+import Analytics from "./pages/Analytics"; // Phase 4
+import Security from "./pages/Security"; // Phase 4
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -43,6 +46,9 @@ const App = () => (
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/programs" element={<Programs />} />
                   <Route path="/program/:programId" element={<ProgramDetail />} />
+                  <Route path="/community" element={<Community />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                  <Route path="/security" element={<Security />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
