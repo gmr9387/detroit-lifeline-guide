@@ -1,4 +1,16 @@
-import { UserProfile, Application, TodoItem, Notification, ProgressMilestone } from '@/types';
+import { 
+  UserProfile, 
+  Application, 
+  TodoItem, 
+  Notification, 
+  ProgressMilestone,
+  Document,
+  UserReview,
+  SuccessStory,
+  AnalyticsData,
+  CommunityPost,
+  CommunityReply
+} from '@/types';
 
 const STORAGE_KEYS = {
   USER_PROFILE: 'detroit_navigator_profile',
@@ -8,6 +20,11 @@ const STORAGE_KEYS = {
   TODO_ITEMS: 'detroit_navigator_todos',
   NOTIFICATIONS: 'detroit_navigator_notifications',
   PROGRESS_MILESTONES: 'detroit_navigator_milestones',
+  DOCUMENTS: 'detroit_navigator_documents',
+  REVIEWS: 'detroit_navigator_reviews',
+  SUCCESS_STORIES: 'detroit_navigator_success_stories',
+  COMMUNITY_POSTS: 'detroit_navigator_community_posts',
+  ANALYTICS: 'detroit_navigator_analytics',
 } as const;
 
 export const storageUtils = {
@@ -169,6 +186,186 @@ export const storageUtils = {
     return milestones
       .filter(m => m.applicationId === applicationId)
       .sort((a, b) => a.order - b.order);
+  },
+
+  // Documents
+  saveDocument: (document: Document): void => {
+    const documents = getDocuments();
+    const existingIndex = documents.findIndex(d => d.id === document.id);
+    
+    if (existingIndex >= 0) {
+      documents[existingIndex] = document;
+    } else {
+      documents.push(document);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.DOCUMENTS, JSON.stringify(documents));
+  },
+
+  getDocuments: (): Document[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.DOCUMENTS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  getDocumentsForApplication: (applicationId: string): Document[] => {
+    const documents = getDocuments();
+    return documents.filter(d => d.applicationId === applicationId);
+  },
+
+  deleteDocument: (documentId: string): void => {
+    const documents = getDocuments();
+    const filtered = documents.filter(d => d.id !== documentId);
+    localStorage.setItem(STORAGE_KEYS.DOCUMENTS, JSON.stringify(filtered));
+  },
+
+  // Reviews
+  saveReview: (review: UserReview): void => {
+    const reviews = getReviews();
+    const existingIndex = reviews.findIndex(r => r.id === review.id);
+    
+    if (existingIndex >= 0) {
+      reviews[existingIndex] = review;
+    } else {
+      reviews.push(review);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(reviews));
+  },
+
+  getReviews: (): UserReview[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.REVIEWS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  getReviewsForProgram: (programId: string): UserReview[] => {
+    const reviews = getReviews();
+    return reviews.filter(r => r.programId === programId);
+  },
+
+  // Success Stories
+  saveSuccessStory: (story: SuccessStory): void => {
+    const stories = getSuccessStories();
+    const existingIndex = stories.findIndex(s => s.id === story.id);
+    
+    if (existingIndex >= 0) {
+      stories[existingIndex] = story;
+    } else {
+      stories.push(story);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.SUCCESS_STORIES, JSON.stringify(stories));
+  },
+
+  getSuccessStories: (): SuccessStory[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.SUCCESS_STORIES);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  getSuccessStoriesForProgram: (programId: string): SuccessStory[] => {
+    const stories = getSuccessStories();
+    return stories.filter(s => s.programId === programId);
+  },
+
+  // Community Posts
+  saveCommunityPost: (post: CommunityPost): void => {
+    const posts = getCommunityPosts();
+    const existingIndex = posts.findIndex(p => p.id === post.id);
+    
+    if (existingIndex >= 0) {
+      posts[existingIndex] = post;
+    } else {
+      posts.push(post);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.COMMUNITY_POSTS, JSON.stringify(posts));
+  },
+
+  getCommunityPosts: (): CommunityPost[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.COMMUNITY_POSTS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  addCommunityReply: (postId: string, reply: CommunityReply): void => {
+    const posts = getCommunityPosts();
+    const postIndex = posts.findIndex(p => p.id === postId);
+    
+    if (postIndex >= 0) {
+      posts[postIndex].replies.push(reply);
+      localStorage.setItem(STORAGE_KEYS.COMMUNITY_POSTS, JSON.stringify(posts));
+    }
+  },
+
+  // Analytics
+  saveAnalytics: (analytics: AnalyticsData): void => {
+    localStorage.setItem(STORAGE_KEYS.ANALYTICS, JSON.stringify(analytics));
+  },
+
+  getAnalytics: (): AnalyticsData | null => {
+    const stored = localStorage.getItem(STORAGE_KEYS.ANALYTICS);
+    return stored ? JSON.parse(stored) : null;
+  },
+
+  generateAnalytics: (): AnalyticsData => {
+    const applications = getApplications();
+    const reviews = getReviews();
+    
+    const totalApplications = applications.length;
+    const approvedApplications = applications.filter(app => app.status === 'approved').length;
+    const deniedApplications = applications.filter(app => app.status === 'denied').length;
+    const successRate = totalApplications > 0 ? (approvedApplications / totalApplications) * 100 : 0;
+    
+    // Calculate average wait time from reviews
+    const waitTimes = reviews
+      .filter(r => r.waitTime)
+      .map(r => r.waitTime!);
+    const averageWaitTime = waitTimes.length > 0 
+      ? waitTimes.reduce((sum, time) => sum + time, 0) / waitTimes.length 
+      : 0;
+
+    // Generate monthly application data
+    const monthlyData = applications.reduce((acc, app) => {
+      const month = new Date(app.appliedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+      acc[month] = (acc[month] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const monthlyApplications = Object.entries(monthlyData).map(([month, count]) => ({
+      month,
+      count
+    }));
+
+    // Calculate program success rates
+    const programStats = applications.reduce((acc, app) => {
+      if (!acc[app.programId]) {
+        acc[app.programId] = { total: 0, approved: 0, programName: app.programName };
+      }
+      acc[app.programId].total++;
+      if (app.status === 'approved') {
+        acc[app.programId].approved++;
+      }
+      return acc;
+    }, {} as Record<string, { total: number; approved: number; programName: string }>);
+
+    const programSuccessRates = Object.entries(programStats).map(([programId, stats]) => ({
+      programId,
+      programName: stats.programName,
+      successRate: (stats.approved / stats.total) * 100,
+      averageWaitTime: 21 // Default average wait time
+    }));
+
+    const analytics: AnalyticsData = {
+      totalApplications,
+      approvedApplications,
+      deniedApplications,
+      averageWaitTime,
+      successRate,
+      totalBenefitsReceived: approvedApplications * 2, // Estimate
+      monthlyApplications,
+      programSuccessRates
+    };
+
+    saveAnalytics(analytics);
+    return analytics;
   }
 };
 
@@ -195,4 +392,20 @@ function getNotifications(): Notification[] {
 
 function getProgressMilestones(): ProgressMilestone[] {
   return storageUtils.getProgressMilestones();
+}
+
+function getDocuments(): Document[] {
+  return storageUtils.getDocuments();
+}
+
+function getReviews(): UserReview[] {
+  return storageUtils.getReviews();
+}
+
+function getSuccessStories(): SuccessStory[] {
+  return storageUtils.getSuccessStories();
+}
+
+function getCommunityPosts(): CommunityPost[] {
+  return storageUtils.getCommunityPosts();
 }

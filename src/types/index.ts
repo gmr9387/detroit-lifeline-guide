@@ -88,3 +88,90 @@ export interface ProgressMilestone {
   applicationId: string;
   order: number;
 }
+
+export interface Document {
+  id: string;
+  name: string;
+  type: 'pdf' | 'image' | 'document';
+  size: number;
+  uploadedAt: string;
+  applicationId?: string;
+  programId?: string;
+  status: 'pending' | 'verified' | 'rejected';
+  verificationNotes?: string;
+  fileUrl?: string;
+  thumbnailUrl?: string;
+}
+
+export interface UserReview {
+  id: string;
+  programId: string;
+  programName: string;
+  rating: number;
+  review: string;
+  helpfulCount: number;
+  createdAt: string;
+  userId: string;
+  userName: string;
+  applicationStatus: 'approved' | 'denied' | 'pending';
+  waitTime?: number; // days
+  benefitsReceived?: string[];
+}
+
+export interface SuccessStory {
+  id: string;
+  title: string;
+  story: string;
+  programId: string;
+  programName: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  helpfulCount: number;
+  tags: string[];
+  isAnonymous: boolean;
+}
+
+export interface AnalyticsData {
+  totalApplications: number;
+  approvedApplications: number;
+  deniedApplications: number;
+  averageWaitTime: number;
+  successRate: number;
+  totalBenefitsReceived: number;
+  monthlyApplications: Array<{
+    month: string;
+    count: number;
+  }>;
+  programSuccessRates: Array<{
+    programId: string;
+    programName: string;
+    successRate: number;
+    averageWaitTime: number;
+  }>;
+}
+
+export interface CommunityPost {
+  id: string;
+  title: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  category: 'general' | 'application-help' | 'documentation' | 'success-story';
+  tags: string[];
+  replies: CommunityReply[];
+  helpfulCount: number;
+  isPinned: boolean;
+}
+
+export interface CommunityReply {
+  id: string;
+  postId: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  helpfulCount: number;
+  isAcceptedAnswer: boolean;
+}
