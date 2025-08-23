@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { ProgramListSkeleton, InlineLoader } from '@/components/ui/loading';
 import detroitResources from '@/data/detroitResources.json';
 import { Program, ResourceCategory } from '@/types';
 import { 
@@ -27,10 +28,19 @@ export default function Programs() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [showFilters, setShowFilters] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const favorites = storageUtils.getFavorites();
   const categories = detroitResources.categories as ResourceCategory[];
   const programs = detroitResources.programs as Program[];
+
+  // Simulate loading for better UX
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filteredPrograms = useMemo(() => {
     let filtered = programs;
@@ -151,7 +161,9 @@ export default function Programs() {
 
         {/* Programs List */}
         <div className="space-y-4">
-          {filteredPrograms.length === 0 ? (
+          {isLoading ? (
+            <ProgramListSkeleton count={6} />
+          ) : filteredPrograms.length === 0 ? (
             <Card className="text-center p-8">
               <CardContent>
                 <p className="text-muted-foreground mb-4">

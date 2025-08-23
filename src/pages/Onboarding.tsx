@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { storageUtils } from '@/utils/localStorage';
 import { UserProfile } from '@/types';
+import { useFormValidation, userProfileSchema } from '@/hooks/useFormValidation';
 import { ArrowRight, ArrowLeft, Users, DollarSign, MapPin, Heart, Globe } from 'lucide-react';
 
 const TOTAL_STEPS = 5;
@@ -43,6 +44,10 @@ export default function Onboarding() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     householdSize: 1,
     hasChildren: false,
     income: '',
@@ -51,6 +56,7 @@ export default function Onboarding() {
     language: 'english',
   });
 
+  const { validate, validateField, getFieldError, hasErrors } = useFormValidation(userProfileSchema);
   const progress = (currentStep / TOTAL_STEPS) * 100;
 
   const handleNext = () => {
@@ -93,13 +99,28 @@ export default function Onboarding() {
 
   const canProceed = () => {
     switch (currentStep) {
-      case 1: return formData.householdSize > 0;
-      case 2: return formData.income !== '';
-      case 3: return formData.zipCode.length >= 5;
+      case 1: return formData.firstName.trim() && formData.lastName.trim() && formData.email.trim();
+      case 2: return formData.householdSize > 0 && formData.zipCode.trim();
+      case 3: return formData.income !== '';
       case 4: return formData.primaryNeeds.length > 0;
       case 5: return formData.language !== '';
       default: return false;
     }
+  };
+
+  const validateCurrentStep = () => {
+    const currentData = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      zipCode: formData.zipCode,
+      primaryNeeds: formData.primaryNeeds,
+      householdSize: formData.householdSize,
+      income: parseFloat(formData.income) || 0,
+    };
+    
+    return validate(currentData).isValid;
   };
 
   return (
