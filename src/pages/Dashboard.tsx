@@ -4,46 +4,55 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { storageUtils } from '@/utils/localStorage';
+import { useAuth } from '@/contexts/AuthContext';
 import { UserProfile, Program, Application } from '@/types';
 import detroitResources from '@/data/detroitResources.json';
-import { 
-  Bell, 
-  Clock, 
-  Star, 
-  ArrowRight, 
-  MapPin, 
+import ApplicationTracker from '@/components/ApplicationTracker';
+import AIRecommendations from '@/components/AIRecommendations';
+import {
+  Bell,
+  Clock,
+  Star,
+  ArrowRight,
+  MapPin,
   Phone,
   ExternalLink,
   Calendar,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  User,
+  LogOut,
+  Search,
+  MessageSquare,
+  BarChart3,
+  Shield
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { user, logout, isAuthenticated } = useAuth();
   const [recommendations, setRecommendations] = useState<Program[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
 
   useEffect(() => {
-    const userProfile = storageUtils.getUserProfile();
-    if (!userProfile) {
-      navigate('/onboarding');
+    if (!isAuthenticated) {
+      navigate('/login');
       return;
     }
 
-    setProfile(userProfile);
-    setApplications(storageUtils.getApplications());
-    
-    // Generate personalized recommendations
-    const allPrograms = detroitResources.programs as Program[];
-    const personalizedPrograms = allPrograms.filter(program => 
-      userProfile.primaryNeeds.includes(program.category)
-    ).slice(0, 4);
-    
-    setRecommendations(personalizedPrograms);
-  }, [navigate]);
+    if (user) {
+      setApplications(storageUtils.getApplications());
+      
+      // Generate personalized recommendations
+      const allPrograms = detroitResources.programs as Program[];
+      const personalizedPrograms = allPrograms.filter(program => 
+        user.primaryNeeds.includes(program.category)
+      ).slice(0, 4);
+      
+      setRecommendations(personalizedPrograms);
+    }
+  }, [navigate, isAuthenticated, user]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -94,9 +103,28 @@ export default function Dashboard() {
       url: 'https://www.michigan.gov/mibridges',
       urgent: false
     },
+    {
+      title: 'Community',
+      description: 'Connect with others',
+      icon: '👥',
+      url: '/community',
+      urgent: false
+    },
+    {
+      title: 'Analytics',
+      description: 'View your progress',
+      icon: '📊',
+      url: '/analytics',
+      urgent: false
+    },
   ];
 
-  if (!profile) {
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
+  if (!user) {
     return <div>Loading...</div>;
   }
 
@@ -105,15 +133,29 @@ export default function Dashboard() {
       <div className="p-4 space-y-6">
         {/* Header */}
         <div className="bg-gradient-hero rounded-xl p-6 text-primary-foreground">
-          <h1 className="text-2xl font-bold mb-2">
-            {getGreeting()}! 👋
-          </h1>
-          <p className="text-primary-foreground/90 mb-4">
-            You have {recommendations.length} programs that might help you.
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h1 className="text-2xl font-bold mb-2">
+                {getGreeting()}, {user.firstName}! 👋
+              </h1>
+              <p className="text-primary-foreground/90">
+                You have {recommendations.length} programs that might help you.
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="text-primary-foreground hover:bg-primary-foreground/10">
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </Button>
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-primary-foreground hover:bg-primary-foreground/10">
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          </div>
           <div className="flex items-center gap-2 text-sm text-primary-foreground/80">
             <MapPin className="h-4 w-4" />
-            <span>Detroit, MI {profile.zipCode}</span>
+            <span>Detroit, MI {user.zipCode}</span>
           </div>
         </div>
 
@@ -123,7 +165,7 @@ export default function Dashboard() {
             <Clock className="h-5 w-5 text-primary" />
             Quick Actions
           </h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {quickActions.map((action, index) => (
               <Card 
                 key={index} 
@@ -152,97 +194,21 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* My Applications */}
-        {applications.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-lg font-semibold flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-primary" />
-                My Applications
-              </h2>
-              <Link to="/applications">
-                <Button variant="ghost" size="sm">View All</Button>
-              </Link>
-            </div>
-            <div className="space-y-3">
-              {applications.slice(0, 3).map((app) => (
-                <Card key={app.id} className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-medium">{app.programName}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        Applied {new Date(app.appliedAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                    {getStatusBadge(app.status)}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* AI Recommendations */}
+        <AIRecommendations 
+          user={user}
+          programs={detroitResources.programs as Program[]}
+          onProgramSelect={(program) => {
+            // Handle program selection - could navigate to program detail or add to applications
+            console.log('Selected program:', program);
+          }}
+        />
 
-        {/* Recommendations */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              Recommended for You
-            </h2>
-            <Link to="/programs">
-              <Button variant="ghost" size="sm">See All Programs</Button>
-            </Link>
-          </div>
-          <div className="space-y-4">
-            {recommendations.map((program) => (
-              <Card key={program.id} className="transition-smooth hover:shadow-md">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-base mb-1">{program.name}</CardTitle>
-                      <CardDescription className="text-sm line-clamp-2">
-                        {program.description}
-                      </CardDescription>
-                    </div>
-                    <Badge variant="secondary" className="ml-2">
-                      {detroitResources.categories.find(c => c.id === program.category)?.name}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Phone className="h-4 w-4" />
-                      <span>{program.contact.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>{program.contact.hours}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => navigate(`/program/${program.id}`)}
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4 ml-1" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={() => window.open(program.applicationUrl, '_blank')}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+        {/* Application Tracker */}
+        <ApplicationTracker 
+          applications={applications} 
+          onUpdate={setApplications}
+        />
 
         {/* Important Notices */}
         <Card className="border-warning bg-warning/5">

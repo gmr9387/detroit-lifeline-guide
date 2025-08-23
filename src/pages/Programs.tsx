@@ -1,19 +1,17 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { ProgramListSkeleton } from '@/components/ui/loading';
+import AdvancedSearch, { SearchFilters } from '@/components/AdvancedSearch';
 import detroitResources from '@/data/detroitResources.json';
 import { Program, ResourceCategory } from '@/types';
-import { 
-  Search, 
-  Filter, 
-  Phone, 
-  Clock, 
-  MapPin, 
+import {
+  Phone,
+  Clock,
+  MapPin,
   ExternalLink,
   ArrowRight,
   Heart
@@ -24,34 +22,30 @@ export default function Programs() {
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get('category') || '';
   
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
-  const [showFilters, setShowFilters] = useState(false);
+  const [filteredPrograms, setFilteredPrograms] = useState<Program[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const favorites = storageUtils.getFavorites();
   const categories = detroitResources.categories as ResourceCategory[];
   const programs = detroitResources.programs as Program[];
 
-  const filteredPrograms = useMemo(() => {
-    let filtered = programs;
+  // Simulate loading for better UX
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
-    // Filter by category
-    if (selectedCategory) {
-      filtered = filtered.filter(program => program.category === selectedCategory);
+  // Initialize filtered programs with category filter if provided
+  useEffect(() => {
+    if (initialCategory) {
+      const filtered = programs.filter(program => program.category === initialCategory);
+      setFilteredPrograms(filtered);
+    } else {
+      setFilteredPrograms(programs);
     }
-
-    // Filter by search query
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(program =>
-        program.name.toLowerCase().includes(query) ||
-        program.description.toLowerCase().includes(query) ||
-        program.benefits.some(benefit => benefit.toLowerCase().includes(query))
-      );
-    }
-
-    return filtered;
-  }, [programs, selectedCategory, searchQuery]);
+  }, [programs, initialCategory]);
 
   const toggleFavorite = (programId: string) => {
     if (favorites.includes(programId)) {
@@ -78,80 +72,18 @@ export default function Programs() {
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <Card>
-          <CardContent className="p-4 space-y-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search programs, benefits, or keywords..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-
-            <div className="flex gap-2 items-center">
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="flex-1">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
-                  {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                <Filter className="h-4 w-4" />
-              </Button>
-            </div>
-
-            {selectedCategory && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Filtered by:</span>
-                <Badge variant="secondary">
-                  {getCategoryName(selectedCategory)}
-                  <button
-                    onClick={() => setSelectedCategory('')}
-                    className="ml-2 hover:text-destructive"
-                  >
-                    ×
-                  </button>
-                </Badge>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Categories Quick Filter */}
-        {!selectedCategory && (
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant="outline"
-                size="sm"
-                onClick={() => setSelectedCategory(category.id)}
-                className="whitespace-nowrap"
-              >
-                {category.name}
-              </Button>
-            ))}
-          </div>
-        )}
+        {/* Advanced Search */}
+        <AdvancedSearch
+          programs={programs}
+          categories={categories}
+          onResultsChange={setFilteredPrograms}
+        />
 
         {/* Programs List */}
         <div className="space-y-4">
-          {filteredPrograms.length === 0 ? (
+          {isLoading ? (
+            <ProgramListSkeleton count={6} />
+          ) : filteredPrograms.length === 0 ? (
             <Card className="text-center p-8">
               <CardContent>
                 <p className="text-muted-foreground mb-4">
@@ -160,8 +92,7 @@ export default function Programs() {
                 <Button
                   variant="outline"
                   onClick={() => {
-                    setSearchQuery('');
-                    setSelectedCategory('');
+                    setFilteredPrograms(programs);
                   }}
                 >
                   Clear Filters
