@@ -9,7 +9,14 @@ import {
   SuccessStory,
   AnalyticsData,
   CommunityPost,
-  CommunityReply
+  CommunityReply,
+  AdminUser,
+  AdminProgram,
+  SystemAnalytics,
+  APIIntegration,
+  SecurityAudit,
+  DataEncryption,
+  EnterpriseSettings
 } from '@/types';
 
 const STORAGE_KEYS = {
@@ -25,6 +32,13 @@ const STORAGE_KEYS = {
   SUCCESS_STORIES: 'detroit_navigator_success_stories',
   COMMUNITY_POSTS: 'detroit_navigator_community_posts',
   ANALYTICS: 'detroit_navigator_analytics',
+  ADMIN_USERS: 'detroit_navigator_admin_users',
+  ADMIN_PROGRAMS: 'detroit_navigator_admin_programs',
+  SYSTEM_ANALYTICS: 'detroit_navigator_system_analytics',
+  API_INTEGRATIONS: 'detroit_navigator_api_integrations',
+  SECURITY_AUDIT: 'detroit_navigator_security_audit',
+  ENCRYPTION_CONFIG: 'detroit_navigator_encryption_config',
+  ENTERPRISE_SETTINGS: 'detroit_navigator_enterprise_settings',
 } as const;
 
 export const storageUtils = {
@@ -366,6 +380,183 @@ export const storageUtils = {
 
     saveAnalytics(analytics);
     return analytics;
+  },
+
+  // Admin Users
+  saveAdminUser: (user: AdminUser): void => {
+    const users = getAdminUsers();
+    const existingIndex = users.findIndex(u => u.id === user.id);
+    
+    if (existingIndex >= 0) {
+      users[existingIndex] = user;
+    } else {
+      users.push(user);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.ADMIN_USERS, JSON.stringify(users));
+  },
+
+  getAdminUsers: (): AdminUser[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.ADMIN_USERS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  deleteAdminUser: (userId: string): void => {
+    const users = getAdminUsers();
+    const filtered = users.filter(u => u.id !== userId);
+    localStorage.setItem(STORAGE_KEYS.ADMIN_USERS, JSON.stringify(filtered));
+  },
+
+  // Admin Programs
+  saveAdminProgram: (program: AdminProgram): void => {
+    const programs = getAdminPrograms();
+    const existingIndex = programs.findIndex(p => p.id === program.id);
+    
+    if (existingIndex >= 0) {
+      programs[existingIndex] = program;
+    } else {
+      programs.push(program);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.ADMIN_PROGRAMS, JSON.stringify(programs));
+  },
+
+  getAdminPrograms: (): AdminProgram[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.ADMIN_PROGRAMS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  deleteAdminProgram: (programId: string): void => {
+    const programs = getAdminPrograms();
+    const filtered = programs.filter(p => p.id !== programId);
+    localStorage.setItem(STORAGE_KEYS.ADMIN_PROGRAMS, JSON.stringify(filtered));
+  },
+
+  // System Analytics
+  saveSystemAnalytics: (analytics: SystemAnalytics): void => {
+    localStorage.setItem(STORAGE_KEYS.SYSTEM_ANALYTICS, JSON.stringify(analytics));
+  },
+
+  getSystemAnalytics: (): SystemAnalytics | null => {
+    const stored = localStorage.getItem(STORAGE_KEYS.SYSTEM_ANALYTICS);
+    return stored ? JSON.parse(stored) : null;
+  },
+
+  generateSystemAnalytics: (): SystemAnalytics => {
+    const applications = getApplications();
+    const users = getAdminUsers();
+    const programs = getAdminPrograms();
+    
+    const totalUsers = users.length;
+    const activeUsers = users.filter(u => u.isActive).length;
+    const totalApplications = applications.length;
+    const totalPrograms = programs.length;
+    
+    // Calculate top programs
+    const programStats = applications.reduce((acc, app) => {
+      if (!acc[app.programId]) {
+        acc[app.programId] = { count: 0, approved: 0, programName: app.programName };
+      }
+      acc[app.programId].count++;
+      if (app.status === 'approved') {
+        acc[app.programId].approved++;
+      }
+      return acc;
+    }, {} as Record<string, { count: number; approved: number; programName: string }>);
+
+    const topPrograms = Object.entries(programStats)
+      .map(([programId, stats]) => ({
+        programId,
+        programName: stats.programName,
+        applicationCount: stats.count,
+        successRate: (stats.approved / stats.count) * 100
+      }))
+      .sort((a, b) => b.applicationCount - a.applicationCount)
+      .slice(0, 5);
+
+    const analytics: SystemAnalytics = {
+      totalUsers,
+      activeUsers,
+      totalApplications,
+      totalPrograms,
+      systemUptime: 99.9,
+      averageResponseTime: 150,
+      monthlyGrowth: 25,
+      topPrograms,
+      userEngagement: {
+        dailyActiveUsers: Math.floor(activeUsers * 0.3),
+        weeklyActiveUsers: Math.floor(activeUsers * 0.7),
+        monthlyActiveUsers: activeUsers,
+        averageSessionDuration: 8.5
+      },
+      performanceMetrics: {
+        pageLoadTime: 1.2,
+        apiResponseTime: 150,
+        errorRate: 0.1,
+        uptime: 99.9
+      }
+    };
+
+    saveSystemAnalytics(analytics);
+    return analytics;
+  },
+
+  // API Integrations
+  saveAPIIntegration: (integration: APIIntegration): void => {
+    const integrations = getAPIIntegrations();
+    const existingIndex = integrations.findIndex(i => i.id === integration.id);
+    
+    if (existingIndex >= 0) {
+      integrations[existingIndex] = integration;
+    } else {
+      integrations.push(integration);
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.API_INTEGRATIONS, JSON.stringify(integrations));
+  },
+
+  getAPIIntegrations: (): APIIntegration[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.API_INTEGRATIONS);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  deleteAPIIntegration: (integrationId: string): void => {
+    const integrations = getAPIIntegrations();
+    const filtered = integrations.filter(i => i.id !== integrationId);
+    localStorage.setItem(STORAGE_KEYS.API_INTEGRATIONS, JSON.stringify(filtered));
+  },
+
+  // Security Audit
+  saveSecurityAudit: (audit: SecurityAudit): void => {
+    const audits = getSecurityAudits();
+    audits.unshift(audit);
+    const limited = audits.slice(0, 1000); // Keep last 1000 audit entries
+    localStorage.setItem(STORAGE_KEYS.SECURITY_AUDIT, JSON.stringify(limited));
+  },
+
+  getSecurityAudits: (): SecurityAudit[] => {
+    const stored = localStorage.getItem(STORAGE_KEYS.SECURITY_AUDIT);
+    return stored ? JSON.parse(stored) : [];
+  },
+
+  // Data Encryption
+  saveEncryptionConfig: (config: DataEncryption): void => {
+    localStorage.setItem(STORAGE_KEYS.ENCRYPTION_CONFIG, JSON.stringify(config));
+  },
+
+  getEncryptionConfig: (): DataEncryption | null => {
+    const stored = localStorage.getItem(STORAGE_KEYS.ENCRYPTION_CONFIG);
+    return stored ? JSON.parse(stored) : null;
+  },
+
+  // Enterprise Settings
+  saveEnterpriseSettings: (settings: EnterpriseSettings): void => {
+    localStorage.setItem(STORAGE_KEYS.ENTERPRISE_SETTINGS, JSON.stringify(settings));
+  },
+
+  getEnterpriseSettings: (): EnterpriseSettings | null => {
+    const stored = localStorage.getItem(STORAGE_KEYS.ENTERPRISE_SETTINGS);
+    return stored ? JSON.parse(stored) : null;
   }
 };
 
@@ -408,4 +599,16 @@ function getSuccessStories(): SuccessStory[] {
 
 function getCommunityPosts(): CommunityPost[] {
   return storageUtils.getCommunityPosts();
+}
+
+function getAdminUsers(): AdminUser[] {
+  return storageUtils.getAdminUsers();
+}
+
+function getAdminPrograms(): AdminProgram[] {
+  return storageUtils.getAdminPrograms();
+}
+
+function getAPIIntegrations(): APIIntegration[] {
+  return storageUtils.getAPIIntegrations();
 }

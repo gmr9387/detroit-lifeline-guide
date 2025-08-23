@@ -175,3 +175,121 @@ export interface CommunityReply {
   helpfulCount: number;
   isAcceptedAnswer: boolean;
 }
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: 'admin' | 'moderator' | 'analyst';
+  permissions: string[];
+  lastLogin: string;
+  isActive: boolean;
+}
+
+export interface AdminProgram {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  isActive: boolean;
+  lastUpdated: string;
+  applicationCount: number;
+  successRate: number;
+  averageWaitTime: number;
+  contactInfo: {
+    phone: string;
+    email: string;
+    website: string;
+    address: string;
+  };
+  eligibility: Record<string, string>;
+  requiredDocuments: string[];
+  benefits: string[];
+}
+
+export interface SystemAnalytics {
+  totalUsers: number;
+  activeUsers: number;
+  totalApplications: number;
+  totalPrograms: number;
+  systemUptime: number;
+  averageResponseTime: number;
+  monthlyGrowth: number;
+  topPrograms: Array<{
+    programId: string;
+    programName: string;
+    applicationCount: number;
+    successRate: number;
+  }>;
+  userEngagement: {
+    dailyActiveUsers: number;
+    weeklyActiveUsers: number;
+    monthlyActiveUsers: number;
+    averageSessionDuration: number;
+  };
+  performanceMetrics: {
+    pageLoadTime: number;
+    apiResponseTime: number;
+    errorRate: number;
+    uptime: number;
+  };
+}
+
+export interface APIIntegration {
+  id: string;
+  name: string;
+  type: 'government' | 'third-party' | 'internal';
+  status: 'active' | 'inactive' | 'error';
+  lastSync: string;
+  endpoint: string;
+  dataTypes: string[];
+  syncFrequency: string;
+  errorCount: number;
+  successRate: number;
+}
+
+export interface SecurityAudit {
+  id: string;
+  timestamp: string;
+  eventType: 'login' | 'data_access' | 'admin_action' | 'security_alert';
+  userId?: string;
+  userName?: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+  userAgent: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  status: 'resolved' | 'pending' | 'investigating';
+}
+
+export interface DataEncryption {
+  algorithm: string;
+  keySize: number;
+  encryptionLevel: 'standard' | 'high' | 'military';
+  lastKeyRotation: string;
+  complianceStatus: {
+    hipaa: boolean;
+    gdpr: boolean;
+    sox: boolean;
+  };
+}
+
+export interface EnterpriseSettings {
+  organizationName: string;
+  logo: string;
+  primaryColor: string;
+  customDomain: string;
+  features: {
+    adminDashboard: boolean;
+    apiIntegrations: boolean;
+    advancedSecurity: boolean;
+    customBranding: boolean;
+    multiTenant: boolean;
+  };
+  limits: {
+    maxUsers: number;
+    maxPrograms: number;
+    maxStorage: number;
+    apiCallsPerHour: number;
+  };
+}
