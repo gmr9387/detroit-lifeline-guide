@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { UserProfile, Program, Application } from '@/types';
 import detroitResources from '@/data/detroitResources.json';
 import ApplicationTracker from '@/components/ApplicationTracker';
+import AIRecommendations from '@/components/AIRecommendations';
 import { 
   Bell, 
   Clock, 
@@ -175,73 +176,21 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* AI Recommendations */}
+        <AIRecommendations 
+          user={user}
+          programs={detroitResources.programs as Program[]}
+          onProgramSelect={(program) => {
+            // Handle program selection - could navigate to program detail or add to applications
+            console.log('Selected program:', program);
+          }}
+        />
+
         {/* Application Tracker */}
         <ApplicationTracker 
           applications={applications} 
           onUpdate={setApplications}
         />
-
-        {/* Recommendations */}
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              Recommended for You
-            </h2>
-            <Link to="/programs">
-              <Button variant="ghost" size="sm">See All Programs</Button>
-            </Link>
-          </div>
-          <div className="space-y-4">
-            {recommendations.map((program) => (
-              <Card key={program.id} className="transition-smooth hover:shadow-md">
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="text-base mb-1">{program.name}</CardTitle>
-                      <CardDescription className="text-sm line-clamp-2">
-                        {program.description}
-                      </CardDescription>
-                    </div>
-                    <Badge variant="secondary" className="ml-2">
-                      {detroitResources.categories.find(c => c.id === program.category)?.name}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Phone className="h-4 w-4" />
-                      <span>{program.contact.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>{program.contact.hours}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <Button 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => navigate(`/program/${program.id}`)}
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4 ml-1" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={() => window.open(program.applicationUrl, '_blank')}
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
 
         {/* Important Notices */}
         <Card className="border-warning bg-warning/5">
