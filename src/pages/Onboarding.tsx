@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { storageUtils } from '@/utils/localStorage';
 import { UserProfile } from '@/types';
 import { useFormValidation, userProfileSchema } from '@/hooks/useFormValidation';
+import { cn } from '@/lib/utils';
 import { ArrowRight, ArrowLeft, Users, DollarSign, MapPin, Heart, Globe } from 'lucide-react';
 
 const TOTAL_STEPS = 5;
@@ -151,21 +152,113 @@ export default function Onboarding() {
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-4">
-            {/* Step 1: Household */}
+                    <CardContent className="space-y-4">
+            {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="householdSize">How many people live in your household?</Label>
+                  <Label htmlFor="firstName">First Name *</Label>
+                  <Input
+                    id="firstName"
+                    type="text"
+                    value={formData.firstName}
+                    onChange={(e) => {
+                      updateFormData('firstName', e.target.value);
+                      validateField('firstName', e.target.value);
+                    }}
+                    className={cn("mt-2", getFieldError('firstName') && "border-destructive")}
+                  />
+                  {getFieldError('firstName') && (
+                    <p className="text-sm text-destructive mt-1">{getFieldError('firstName')}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="lastName">Last Name *</Label>
+                  <Input
+                    id="lastName"
+                    type="text"
+                    value={formData.lastName}
+                    onChange={(e) => {
+                      updateFormData('lastName', e.target.value);
+                      validateField('lastName', e.target.value);
+                    }}
+                    className={cn("mt-2", getFieldError('lastName') && "border-destructive")}
+                  />
+                  {getFieldError('lastName') && (
+                    <p className="text-sm text-destructive mt-1">{getFieldError('lastName')}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="email">Email Address *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => {
+                      updateFormData('email', e.target.value);
+                      validateField('email', e.target.value);
+                    }}
+                    className={cn("mt-2", getFieldError('email') && "border-destructive")}
+                  />
+                  {getFieldError('email') && (
+                    <p className="text-sm text-destructive mt-1">{getFieldError('email')}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="phone">Phone Number (Optional)</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => updateFormData('phone', e.target.value)}
+                    className="mt-2"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: Household & Location */}
+            {currentStep === 2 && (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="householdSize">How many people live in your household? *</Label>
                   <Input
                     id="householdSize"
                     type="number"
                     min="1"
                     max="20"
                     value={formData.householdSize}
-                    onChange={(e) => updateFormData('householdSize', parseInt(e.target.value))}
-                    className="mt-2"
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value);
+                      updateFormData('householdSize', value);
+                      validateField('householdSize', value);
+                    }}
+                    className={cn("mt-2", getFieldError('householdSize') && "border-destructive")}
                   />
+                  {getFieldError('householdSize') && (
+                    <p className="text-sm text-destructive mt-1">{getFieldError('householdSize')}</p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="zipCode">ZIP Code *</Label>
+                  <Input
+                    id="zipCode"
+                    type="text"
+                    placeholder="48201"
+                    maxLength={5}
+                    value={formData.zipCode}
+                    onChange={(e) => {
+                      updateFormData('zipCode', e.target.value);
+                      validateField('zipCode', e.target.value);
+                    }}
+                    className={cn("mt-2", getFieldError('zipCode') && "border-destructive")}
+                  />
+                  {getFieldError('zipCode') && (
+                    <p className="text-sm text-destructive mt-1">{getFieldError('zipCode')}</p>
+                  )}
+                  <p className="text-sm text-muted-foreground mt-2">
+                    This helps us show you programs available in your area.
+                  </p>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -178,8 +271,8 @@ export default function Onboarding() {
               </div>
             )}
 
-            {/* Step 2: Income */}
-            {currentStep === 2 && (
+            {/* Step 3: Income */}
+            {currentStep === 3 && (
               <div>
                 <Label>What is your household's yearly income? (This helps us find programs you qualify for)</Label>
                 <RadioGroup
