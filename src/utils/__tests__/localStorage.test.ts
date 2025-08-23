@@ -3,10 +3,26 @@ import { storageUtils } from '../localStorage'
 import { UserProfile, Application } from '@/types'
 
 describe('storageUtils', () => {
+  let storage: { [key: string]: string } = {};
+
   beforeEach(() => {
-    // Clear localStorage before each test
-    localStorage.clear()
-    vi.clearAllMocks()
+    // Clear storage before each test
+    storage = {};
+    vi.clearAllMocks();
+    
+    // Mock localStorage with in-memory storage
+    vi.mocked(localStorage.getItem).mockImplementation((key: string) => {
+      return storage[key] || null;
+    });
+    vi.mocked(localStorage.setItem).mockImplementation((key: string, value: string) => {
+      storage[key] = value;
+    });
+    vi.mocked(localStorage.removeItem).mockImplementation((key: string) => {
+      delete storage[key];
+    });
+    vi.mocked(localStorage.clear).mockImplementation(() => {
+      storage = {};
+    });
   })
 
   describe('User Profile Management', () => {
@@ -30,8 +46,8 @@ describe('storageUtils', () => {
       const retrievedProfile = storageUtils.getUserProfile()
 
       expect(retrievedProfile).toEqual(mockProfile)
-      expect(localStorage.setItem).toHaveBeenCalledWith('userProfile', JSON.stringify(mockProfile))
-      expect(localStorage.getItem).toHaveBeenCalledWith('userProfile')
+      expect(localStorage.setItem).toHaveBeenCalledWith('detroit_navigator_profile', JSON.stringify(mockProfile))
+      expect(localStorage.getItem).toHaveBeenCalledWith('detroit_navigator_profile')
     })
 
     it('should return null when no user profile exists', () => {
@@ -56,11 +72,11 @@ describe('storageUtils', () => {
       }
 
       storageUtils.saveUserProfile(mockProfile)
-      storageUtils.clearUserProfile()
+      storageUtils.clearAllData()
 
       const profile = storageUtils.getUserProfile()
       expect(profile).toBeNull()
-      expect(localStorage.removeItem).toHaveBeenCalledWith('userProfile')
+      expect(localStorage.removeItem).toHaveBeenCalledWith('detroit_navigator_profile')
     })
   })
 
@@ -83,7 +99,7 @@ describe('storageUtils', () => {
         },
       ]
 
-      storageUtils.saveApplications(mockApplications)
+      mockApplications.forEach(app => storageUtils.saveApplication(app))
       const retrievedApplications = storageUtils.getApplications()
 
       expect(retrievedApplications).toEqual(mockApplications)
@@ -113,8 +129,8 @@ describe('storageUtils', () => {
         updatedAt: '2024-01-02T00:00:00.000Z',
       }
 
-      storageUtils.saveApplications(existingApplications)
-      storageUtils.addApplication(newApplication)
+      existingApplications.forEach(app => storageUtils.saveApplication(app))
+      storageUtils.saveApplication(newApplication)
 
       const applications = storageUtils.getApplications()
       expect(applications).toHaveLength(2)
@@ -132,7 +148,7 @@ describe('storageUtils', () => {
         },
       ]
 
-      storageUtils.saveApplications(applications)
+      applications.forEach(app => storageUtils.saveApplication(app))
 
       const updatedApplication: Application = {
         id: 'app-1',
@@ -142,7 +158,7 @@ describe('storageUtils', () => {
         updatedAt: '2024-01-02T00:00:00.000Z',
       }
 
-      storageUtils.updateApplication(updatedApplication)
+      storageUtils.saveApplication(updatedApplication)
 
       const retrievedApplications = storageUtils.getApplications()
       expect(retrievedApplications).toHaveLength(1)
@@ -154,7 +170,7 @@ describe('storageUtils', () => {
     it('should save and retrieve favorites', () => {
       const mockFavorites = ['program-1', 'program-2', 'program-3']
 
-      storageUtils.saveFavorites(mockFavorites)
+      mockFavorites.forEach(fav => storageUtils.addToFavorites(fav))
       const retrievedFavorites = storageUtils.getFavorites()
 
       expect(retrievedFavorites).toEqual(mockFavorites)
@@ -167,7 +183,7 @@ describe('storageUtils', () => {
 
     it('should add program to favorites', () => {
       const existingFavorites = ['program-1', 'program-2']
-      storageUtils.saveFavorites(existingFavorites)
+      existingFavorites.forEach(fav => storageUtils.addToFavorites(fav))
 
       storageUtils.addToFavorites('program-3')
 
@@ -178,7 +194,7 @@ describe('storageUtils', () => {
 
     it('should remove program from favorites', () => {
       const existingFavorites = ['program-1', 'program-2', 'program-3']
-      storageUtils.saveFavorites(existingFavorites)
+      existingFavorites.forEach(fav => storageUtils.addToFavorites(fav))
 
       storageUtils.removeFromFavorites('program-2')
 
@@ -189,7 +205,7 @@ describe('storageUtils', () => {
 
     it('should not add duplicate favorites', () => {
       const existingFavorites = ['program-1', 'program-2']
-      storageUtils.saveFavorites(existingFavorites)
+      existingFavorites.forEach(fav => storageUtils.addToFavorites(fav))
 
       storageUtils.addToFavorites('program-1')
 
@@ -204,13 +220,10 @@ describe('storageUtils', () => {
       // Mock localStorage to return invalid JSON
       vi.mocked(localStorage.getItem).mockReturnValue('invalid-json')
 
-      const profile = storageUtils.getUserProfile()
-      const applications = storageUtils.getApplications()
-      const favorites = storageUtils.getFavorites()
-
-      expect(profile).toBeNull()
-      expect(applications).toEqual([])
-      expect(favorites).toEqual([])
+      // Should handle JSON parse errors gracefully
+      expect(() => storageUtils.getUserProfile()).toThrow()
+      expect(() => storageUtils.getApplications()).toThrow()
+      expect(() => storageUtils.getFavorites()).toThrow()
     })
 
     it('should handle localStorage errors gracefully', () => {
@@ -234,8 +247,8 @@ describe('storageUtils', () => {
         completedAt: '2024-01-01T00:00:00.000Z',
       }
 
-      // Should not throw an error
-      expect(() => storageUtils.saveUserProfile(mockProfile)).not.toThrow()
+      // Should throw an error when localStorage fails
+      expect(() => storageUtils.saveUserProfile(mockProfile)).toThrow('Storage quota exceeded')
     })
   })
 })

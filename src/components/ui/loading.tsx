@@ -1,5 +1,10 @@
-import { Loader2, Skeleton } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// Simple skeleton component since it's not in lucide-react
+const Skeleton = ({ className }: { className?: string }) => (
+  <div className={cn("animate-pulse bg-muted rounded", className)} />
+);
 
 // Spinner component for general loading states
 export const Spinner = ({ 

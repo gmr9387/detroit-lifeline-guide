@@ -11,9 +11,12 @@ const localStorageMock = {
 global.localStorage = localStorageMock
 
 // Mock crypto.randomUUID
-global.crypto = {
-  randomUUID: () => 'test-uuid-123',
-} as Crypto
+Object.defineProperty(global, 'crypto', {
+  value: {
+    randomUUID: () => 'test-uuid-123',
+  },
+  writable: true,
+});
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
