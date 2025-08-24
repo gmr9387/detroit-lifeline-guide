@@ -8,6 +8,9 @@ import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Programs from "./pages/Programs";
 import ProgramDetail from "./pages/ProgramDetail";
+import Notifications from "./pages/Notifications";
+import Community from "./pages/Community";
+import AnalyticsPage from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/program/:programId" element={<ProgramDetail />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

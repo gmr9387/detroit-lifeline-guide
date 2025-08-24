@@ -57,3 +57,239 @@ export interface QuickAction {
   url: string;
   category: string;
 }
+
+export interface TodoItem {
+  id: string;
+  title: string;
+  description?: string;
+  completed: boolean;
+  category: 'urgent' | 'important' | 'routine';
+  dueDate?: string;
+  createdAt: string;
+  applicationId?: string;
+  programId?: string;
+}
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'warning' | 'success' | 'error';
+  read: boolean;
+  createdAt: string;
+  actionUrl?: string;
+}
+
+export interface ProgressMilestone {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+  applicationId: string;
+  order: number;
+}
+
+export interface Document {
+  id: string;
+  name: string;
+  type: 'pdf' | 'image' | 'document';
+  size: number;
+  uploadedAt: string;
+  applicationId?: string;
+  programId?: string;
+  status: 'pending' | 'verified' | 'rejected';
+  verificationNotes?: string;
+  fileUrl?: string;
+  thumbnailUrl?: string;
+}
+
+export interface UserReview {
+  id: string;
+  programId: string;
+  programName: string;
+  rating: number;
+  review: string;
+  helpfulCount: number;
+  createdAt: string;
+  userId: string;
+  userName: string;
+  applicationStatus: 'approved' | 'denied' | 'pending';
+  waitTime?: number; // days
+  benefitsReceived?: string[];
+}
+
+export interface SuccessStory {
+  id: string;
+  title: string;
+  story: string;
+  programId: string;
+  programName: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  helpfulCount: number;
+  tags: string[];
+  isAnonymous: boolean;
+}
+
+export interface AnalyticsData {
+  totalApplications: number;
+  approvedApplications: number;
+  deniedApplications: number;
+  averageWaitTime: number;
+  successRate: number;
+  totalBenefitsReceived: number;
+  monthlyApplications: Array<{
+    month: string;
+    count: number;
+  }>;
+  programSuccessRates: Array<{
+    programId: string;
+    programName: string;
+    successRate: number;
+    averageWaitTime: number;
+  }>;
+}
+
+export interface CommunityPost {
+  id: string;
+  title: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  category: 'general' | 'application-help' | 'documentation' | 'success-story';
+  tags: string[];
+  replies: CommunityReply[];
+  helpfulCount: number;
+  isPinned: boolean;
+}
+
+export interface CommunityReply {
+  id: string;
+  postId: string;
+  content: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string;
+  helpfulCount: number;
+  isAcceptedAnswer: boolean;
+}
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: 'admin' | 'moderator' | 'analyst';
+  permissions: string[];
+  lastLogin: string;
+  isActive: boolean;
+}
+
+export interface AdminProgram {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  isActive: boolean;
+  lastUpdated: string;
+  applicationCount: number;
+  successRate: number;
+  averageWaitTime: number;
+  contactInfo: {
+    phone: string;
+    email: string;
+    website: string;
+    address: string;
+  };
+  eligibility: Record<string, string>;
+  requiredDocuments: string[];
+  benefits: string[];
+}
+
+export interface SystemAnalytics {
+  totalUsers: number;
+  activeUsers: number;
+  totalApplications: number;
+  totalPrograms: number;
+  systemUptime: number;
+  averageResponseTime: number;
+  monthlyGrowth: number;
+  topPrograms: Array<{
+    programId: string;
+    programName: string;
+    applicationCount: number;
+    successRate: number;
+  }>;
+  userEngagement: {
+    dailyActiveUsers: number;
+    weeklyActiveUsers: number;
+    monthlyActiveUsers: number;
+    averageSessionDuration: number;
+  };
+  performanceMetrics: {
+    pageLoadTime: number;
+    apiResponseTime: number;
+    errorRate: number;
+    uptime: number;
+  };
+}
+
+export interface APIIntegration {
+  id: string;
+  name: string;
+  type: 'government' | 'third-party' | 'internal';
+  status: 'active' | 'inactive' | 'error';
+  lastSync: string;
+  endpoint: string;
+  dataTypes: string[];
+  syncFrequency: string;
+  errorCount: number;
+  successRate: number;
+}
+
+export interface SecurityAudit {
+  id: string;
+  timestamp: string;
+  eventType: 'login' | 'data_access' | 'admin_action' | 'security_alert';
+  userId?: string;
+  userName?: string;
+  action: string;
+  details: string;
+  ipAddress: string;
+  userAgent: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  status: 'resolved' | 'pending' | 'investigating';
+}
+
+export interface DataEncryption {
+  algorithm: string;
+  keySize: number;
+  encryptionLevel: 'standard' | 'high' | 'military';
+  lastKeyRotation: string;
+  complianceStatus: {
+    hipaa: boolean;
+    gdpr: boolean;
+    sox: boolean;
+  };
+}
+
+export interface EnterpriseSettings {
+  organizationName: string;
+  logo: string;
+  primaryColor: string;
+  customDomain: string;
+  features: {
+    adminDashboard: boolean;
+    apiIntegrations: boolean;
+    advancedSecurity: boolean;
+    customBranding: boolean;
+    multiTenant: boolean;
+  };
+  limits: {
+    maxUsers: number;
+    maxPrograms: number;
+    maxStorage: number;
+    apiCallsPerHour: number;
+  };
+}

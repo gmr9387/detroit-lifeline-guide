@@ -16,9 +16,12 @@ import {
   ExternalLink,
   Calendar,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  ListTodo
 } from 'lucide-react';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { TodoList } from '@/components/TodoList';
+import { NotificationCenter } from '@/components/NotificationCenter';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -242,6 +245,69 @@ export default function Dashboard() {
               </Card>
             ))}
           </div>
+        </div>
+
+        {/* Notifications */}
+        <div>
+          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <Bell className="h-5 w-5 text-primary" />
+            Recent Notifications
+          </h2>
+          <NotificationCenter maxNotifications={3} />
+        </div>
+
+        {/* Todo List */}
+        <div>
+          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <ListTodo className="h-5 w-5 text-primary" />
+            My Tasks
+          </h2>
+          <TodoList maxItems={5} />
+        </div>
+
+        {/* Phase 5 Features */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="border-primary bg-primary/5">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium">Analytics & Insights</h3>
+                  <p className="text-sm text-muted-foreground">Track your progress and optimize benefits</p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/analytics')}
+                >
+                  View
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-primary bg-primary/5">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <MessageSquare className="h-5 w-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium">Community Forum</h3>
+                  <p className="text-sm text-muted-foreground">Connect with others and share experiences</p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/community')}
+                >
+                  Join
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Important Notices */}
